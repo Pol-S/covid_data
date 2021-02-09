@@ -18,14 +18,18 @@ class Graph extends React.Component {
     const covidData = this.props.covidData.map((data) => {
       const dateString = data.date.toString();
       const year = dateString.substring(0, 4);
+      const yearNum = parseInt(year)
       const month = dateString.substring(4, 6);
+      const monthNum = parseInt(month)
       const day = dateString.substring(6);
-      console.log(year, month, day);
+      const dayNum = parseInt(day)
       return {
-        x: new Date(year, month, day), 
-        y: data.total
+        x: new Date(yearNum, monthNum, dayNum), 
+        y: data.total,
+        day: day
       }
     })
+    console.log(covidData.filter(data => data.day == 13))
     return (
       <div>
           <VictoryChart
@@ -61,12 +65,10 @@ class Graph extends React.Component {
             }
           >
             <VictoryAxis
-              tickValues={covidData.map(data => data.x.day === "20")}
-              // covidData.map{|data| 
-            // if data.x.day == 01
-            //
-          //}
-              tickFormat={(x) => new Date(x).getFullYear()}
+              tickValues={covidData.filter(data => data.day == 13).map((data) => {
+                return data.x
+              })}
+              tickFormat={(x) => new Date(x).getMonth()}
             />
             <VictoryLine
               style={{
@@ -80,5 +82,18 @@ class Graph extends React.Component {
     );
   }
 }
-
+// [
+//   new Date(2020, 3, 4),
+//   new Date(2020, 4, 4),
+//   new Date(2020, 5, 4),
+//   new Date(2020, 6, 4),
+//   new Date(2020, 7, 4),
+//   new Date(2020, 8, 4),
+//   new Date(2020, 9, 4),
+//   new Date(2020, 10, 4),
+//   new Date(2020, 11, 4),
+//   new Date(2020, 12, 4),
+//   new Date(2021, 1, 4),
+//   new Date(2021, 2, 4),
+// ]
 export default Graph
