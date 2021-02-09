@@ -15,6 +15,17 @@ class Graph extends React.Component {
     this.setState({zoomDomain: domain});
   }
   render() {
+    const covidData = this.props.covidData.map((data) => {
+      const dateString = data.date.toString();
+      const year = dateString.substring(0, 4);
+      const month = dateString.substring(4, 6);
+      const day = dateString.substring(6);
+      console.log(year, month, day);
+      return {
+        x: new Date(year, month, day), 
+        y: data.total
+      }
+    })
     return (
       <div>
           <VictoryChart
@@ -33,16 +44,7 @@ class Graph extends React.Component {
               style={{
                 data: {stroke: "tomato"}
               }}
-              data={[
-                {x: new Date(1982, 1, 1), y: 125},
-                {x: new Date(1987, 1, 1), y: 257},
-                {x: new Date(1993, 1, 1), y: 345},
-                {x: new Date(1997, 1, 1), y: 515},
-                {x: new Date(2001, 1, 1), y: 132},
-                {x: new Date(2005, 1, 1), y: 305},
-                {x: new Date(2011, 1, 1), y: 270},
-                {x: new Date(2015, 1, 1), y: 470}
-              ]}
+              data={covidData}
             />
           </VictoryChart>
           <VictoryChart
@@ -59,33 +61,21 @@ class Graph extends React.Component {
             }
           >
             <VictoryAxis
-              tickValues={[
-                new Date(1985, 1, 1),
-                new Date(1990, 1, 1),
-                new Date(1995, 1, 1),
-                new Date(2000, 1, 1),
-                new Date(2005, 1, 1),
-                new Date(2010, 1, 1),
-                new Date(2015, 1, 1)
-              ]}
+              tickValues={covidData.map(data => data.x.day === "20")}
+              // covidData.map{|data| 
+            // if data.x.day == 01
+            //
+          //}
               tickFormat={(x) => new Date(x).getFullYear()}
             />
             <VictoryLine
               style={{
                 data: {stroke: "tomato"}
               }}
-              data={[
-                {x: new Date(1982, 1, 1), y: 125},
-                {x: new Date(1987, 1, 1), y: 257},
-                {x: new Date(1993, 1, 1), y: 345},
-                {x: new Date(1997, 1, 1), y: 515},
-                {x: new Date(2001, 1, 1), y: 132},
-                {x: new Date(2005, 1, 1), y: 305},
-                {x: new Date(2011, 1, 1), y: 270},
-                {x: new Date(2015, 1, 1), y: 470}
-              ]}
+              data={covidData}
             />
           </VictoryChart>
+          <CovidTracking />
       </div>
     );
   }
