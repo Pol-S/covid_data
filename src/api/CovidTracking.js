@@ -20,7 +20,7 @@ class CovidTracking extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('https://api.covidtracking.com/v1/states/ca/20200501.json')
+    axios.get('https://api.covidtracking.com/v1/states/ca/daily.json')
       .then(response => {
         this.setState({
           covidData: response.data
