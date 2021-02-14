@@ -17,12 +17,20 @@ class App extends React.Component {
   handleChange(event){
     console.log(event.target)
     const {value} = event.target
-    console.log(value)
-    this.state.usState = value
-    console.log(this.props.usState)
+    this.setState({usState: value})
+    console.log(this.state.usState)
   }
 
   componentDidMount() {
+    axios.get(`https://api.covidtracking.com/v1/states/ca/daily.json`)
+      .then(response => {
+        this.setState({
+          covidData: response.data
+        })
+      })
+  }
+
+  componentDidUpdate() {
     axios.get(`https://api.covidtracking.com/v1/states/${this.state.usState}/daily.json`)
       .then(response => {
         this.setState({
