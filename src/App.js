@@ -9,34 +9,39 @@ class App extends React.Component {
     super()
     this.state = {
       covidData: [],
-      usState: "ca"
+      usState: "ca",
+      isMounted: false
     }
     this.handleChange = this.handleChange.bind(this)
   }
 
   handleChange(event){
-    console.log(event.target)
-    const {value} = event.target
-    this.setState({usState: value})
-    console.log(this.state.usState)
+    console.log([event.target.value, "handle change log 1"])
+    this.setState({usState: event.target.value})
+    console.log([this.state.usState, "handle change after set state"])
+    this.handleUpdate()
   }
 
   componentDidMount() {
     axios.get(`https://api.covidtracking.com/v1/states/ca/daily.json`)
       .then(response => {
         this.setState({
-          covidData: response.data
+          covidData: response.data,
+          isMounted: true
         })
+      console.log("Did Mount")
       })
-  }
+    }
 
-  componentDidUpdate() {
+  handleUpdate() {
+    console.log([this.state.usState, "handle update, incoming US State"])
     axios.get(`https://api.covidtracking.com/v1/states/${this.state.usState}/daily.json`)
       .then(response => {
         this.setState({
           covidData: response.data
         })
-      })
+      console.log("handle Update")
+      })  
   }
   
   render() {
