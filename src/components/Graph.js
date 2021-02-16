@@ -18,7 +18,16 @@ class Graph extends React.Component {
 
 
   render() {
+    console.log(this.props.yAxis)
     const covidData = this.props.covidData.map((data) => {
+      let y = data.total
+      if (this.props.yAxis === 'death') {
+        y = data.death
+      } else if ( this.props.yAxis === 'hospitalized') {
+        y = data.hospitalized
+      } else if ( this.props.yAxis === 'total') {
+        y = data.total
+      }
       const dateString = data.date.toString();
       const year = dateString.substring(0, 4);
       const yearNum = parseInt(year)
@@ -28,7 +37,7 @@ class Graph extends React.Component {
       const dayNum = parseInt(day)
       return {
         x: new Date(yearNum, monthNum, dayNum), 
-        y: data.total,
+        y: y,
         day: day
       }
     })
@@ -49,7 +58,7 @@ class Graph extends React.Component {
             }
           >
             <VictoryLine
-            className="victory-line"
+            className="victory"
               style={{
                 data: {stroke: "tomato"}
               }}
