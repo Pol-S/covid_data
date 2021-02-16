@@ -1,12 +1,12 @@
 import React from "react"
 import * as V from "victory";
 import { VictoryLine, VictoryChart, VictoryAxis, VictoryBrushContainer, VictoryZoomContainer } from 'victory';
-import CovidTracking from "../api/CovidTracking"
 
 class Graph extends React.Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+    };
   }
   handleZoom(domain) {
     this.setState({selectedDomain: domain});
@@ -14,6 +14,8 @@ class Graph extends React.Component {
   handleBrush(domain) {
     this.setState({zoomDomain: domain});
   }
+
+
   render() {
     const covidData = this.props.covidData.map((data) => {
       const dateString = data.date.toString();
@@ -77,7 +79,7 @@ class Graph extends React.Component {
               data={covidData}
             />
           </VictoryChart>
-          <CovidTracking />
+
       </div>
     );
   }
