@@ -37,8 +37,9 @@ class Graph extends React.Component {
       <div>
         <div className="graph">
           <VictoryChart
-            width={550}
+            width={600}
             height={300}
+            padding={{top: 0, left: 100, right: 50, bottom: 30}}
             scale={{x: "time"}}
             containerComponent={
               <VictoryZoomContainer responsive={false}
@@ -57,10 +58,10 @@ class Graph extends React.Component {
             />
           </VictoryChart>
           <VictoryChart
-            width={550}
+            width={600}
             height={90}
             scale={{x: "time"}}
-            padding={{top: 0, left: 50, right: 50, bottom: 30}}
+            padding={{top: 0, left: 100, right: 50, bottom: 30}}
             containerComponent={
               <VictoryBrushContainer responsive={false}
                 brushDimension="x"
