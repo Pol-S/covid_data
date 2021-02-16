@@ -13,13 +13,8 @@ class App extends React.Component {
       isMounted: false
     }
     this.handleChange = this.handleChange.bind(this)
-  }
-
-  handleChange(event){
-    console.log([event.target.value, "handle change log 1"])
-    this.setState({usState: event.target.value})
-    console.log([this.state.usState, "handle change after set state"])
-    this.handleUpdate()
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleUpdate = this.handleUpdate.bind(this)
   }
 
   componentDidMount() {
@@ -29,21 +24,26 @@ class App extends React.Component {
           covidData: response.data,
           isMounted: true
         })
-      console.log("Did Mount")
       })
     }
 
+  handleChange(event){
+    this.setState({usState: event.target.value}, () => this.handleUpdate())
+  }
+
   handleUpdate() {
-    console.log([this.state.usState, "handle update, incoming US State"])
     axios.get(`https://api.covidtracking.com/v1/states/${this.state.usState}/daily.json`)
       .then(response => {
         this.setState({
           covidData: response.data
         })
-      console.log("handle Update")
       })  
   }
-  
+
+  handleSubmit(event) {
+    event.preventDefault();
+  }
+
   render() {
     return(
       <div>
@@ -55,17 +55,16 @@ class App extends React.Component {
           covidData={this.state.covidData}
           usState={this.state.usState}
         />   
-        <label>Choose a State:</label>
-          <select 
-              value={this.state.usState}
-              onChange={this.handleChange}
-              name="state"
-          >
+        <form onSubmit={this.handleSubmit}>
+          <label>Choose a State:
+            <select value={this.state.usState} onChange={this.handleChange} name="state" >
               <option value='ca'>California</option>
               <option value='ma'>Massachusetts</option>
               <option value='il'>Illinois</option>
-
-          </select>     
+            </select>
+          </label> 
+          <input type="submit" value="Submit" />
+        </form>    
         <Footer />
       </div>
     )
