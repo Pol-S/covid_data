@@ -1,6 +1,7 @@
 import React from "react"
 import * as V from "victory";
 import { VictoryLine, VictoryChart, VictoryAxis, VictoryBrushContainer, VictoryZoomContainer } from 'victory';
+import './Graph.css'
 
 class Graph extends React.Component {
   constructor() {
@@ -34,6 +35,7 @@ class Graph extends React.Component {
     console.log(covidData.filter(data => data.day == 13))
     return (
       <div>
+        <div className="graph">
           <VictoryChart
             width={550}
             height={300}
@@ -47,6 +49,7 @@ class Graph extends React.Component {
             }
           >
             <VictoryLine
+            className="victory-line"
               style={{
                 data: {stroke: "tomato"}
               }}
@@ -79,7 +82,7 @@ class Graph extends React.Component {
               data={covidData}
             />
           </VictoryChart>
-
+          </div>
       </div>
     );
   }
