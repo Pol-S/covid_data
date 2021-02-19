@@ -48,7 +48,7 @@ class App extends React.Component {
     this.setState({usState: event.target.value}, () => this.handleStateUpdate())
   }
 
-  handleCountryChange(event) {
+  handleCountryChange = (event) => {
     this.setState({country: event.target.value}, () => this.handleCountryUpdate()
     )
   }
@@ -67,16 +67,16 @@ class App extends React.Component {
   }
 
   handleCountryUpdate() {
-    axios.get(`http://corona-api.com/countries/${this.state.country}`, {
+    axios.get(`https://corona-api.com/countries/${this.state.country}`, {
       headers: {'Content-Type': 'application/json'}
     })
       .then(response => {
         this.setState({
-          countryData: response.data
+          countryData: response.data.data.timeline
         })
-        console.log('-----')
-        console.log(response.data)
-        console.log('-----')
+        // console.log('-----')
+        // console.log(response.data)
+        // console.log('-----')
       })
   }
 
@@ -162,7 +162,7 @@ class App extends React.Component {
         </label> 
       </form>  
       <GraphCountry covidCountryData={this.state.countryData} />
-      {/* <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit}>
         <label>Choose a Country:
           <select 
             value={this.state.country} 
@@ -172,7 +172,7 @@ class App extends React.Component {
             <option value='RU'>Russia</option>
           </select>
         </label> 
-      </form>     */}
+      </form>    
       <Footer />
     </div>
     )
