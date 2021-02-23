@@ -14,13 +14,15 @@ class App extends React.Component {
       countriesData: [],
       usState: "ca",
       country: 'US',
-      yAxis: 'total'
+      yAxis: 'total',
+      yAxisCountries: 'confirmed'
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleStateUpdate = this.handleStateUpdate.bind(this)
     this.handleYChange = this.handleYChange.bind(this)
     this.handleCountryUpdate = this.handleCountryUpdate.bind(this)
+    this.handleYCountryChange = this.handleYCountryChange.bind(this)
   }
 
   componentDidMount() {
@@ -63,6 +65,10 @@ class App extends React.Component {
 
   handleYChange(event) {
     this.setState({yAxis: event.target.value})
+  }
+
+  handleYCountryChange(event) {
+    this.setState({yAxisCountries: event.target.value})
   }
 
   handleStateUpdate() {
@@ -178,7 +184,10 @@ class App extends React.Component {
           </select>
         </label> 
       </form>  
-      <GraphCountry covidCountryData={this.state.countryData} />
+      <GraphCountry 
+        covidCountryData={this.state.countryData}
+        yAxisCountries={this.state.yAxisCountries}
+       />
       <form onSubmit={this.handleSubmit}>
         <label>Choose a Country:
           <select 
@@ -189,6 +198,16 @@ class App extends React.Component {
           </select>
         </label> 
       </form>    
+      <form onSubmit={this.handleSubmit}>
+        <label>Choose a category:
+          <select value={this.state.yAxisCountries} onChange={this.handleYCountryChange}>
+            <option value='confirmed'>Total</option>
+            <option value='deaths'>Death</option>
+            <option value='recovered'>recovered</option>
+            <option value='new_deaths'>New Deaths</option>
+          </select>
+        </label> 
+      </form>  
       <Footer />
     </div>
     )

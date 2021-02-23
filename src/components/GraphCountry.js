@@ -18,16 +18,16 @@ class GraphCountry extends React.Component {
 
   render() {
     const covidData = this.props.covidCountryData.map((data) => {
-      // let yData = data.total
-      // if (this.props.yAxis === 'death') {
-      //   yData = data.death
-      // } else if ( this.props.yAxis === 'hospitalized') {
-      //   yData = data.hospitalizedCurrently
-      // } else if ( this.props.yAxis === 'total') {
-      //   yData = data.total
-      // } else if (this.props.yAxis === 'deathIncrease') {
-      //   yData = data.deathIncrease
-      // } 
+      let yData = data.confirmed
+      if (this.props.yAxisCountries === 'confirmed') {
+        yData = data.confirmed
+      } else if ( this.props.yAxisCountries === 'deaths') {
+        yData = data.deaths
+      } else if ( this.props.yAxisCountries === 'recovered') {
+        yData = data.recovered
+      } else if (this.props.yAxisCountries === 'new_deaths') {
+        yData = data.new_deaths
+      } 
       const dateString = data.date
       const year = dateString.substring(0, 4);
       // console.log(year)
@@ -40,7 +40,7 @@ class GraphCountry extends React.Component {
       const dayNum = parseInt(day)
       return {
         x: new Date(yearNum, monthNum, dayNum), 
-        y: data.confirmed,
+        y: yData,
         day: day
       }
     })
