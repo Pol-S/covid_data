@@ -11,17 +11,17 @@ class Graph extends React.Component {
     };
   }
   handleZoom(domain) {
-    console.log(domain)
+    // console.log(domain)
     this.setState({selectedDomain: domain});
   }
   handleBrush(domain) {
-    console.log(domain)
+    // console.log(domain)
     this.setState({zoomDomain: domain});
   }
 
 
   render() {
-    console.log(this.props.yAxis)
+    // console.log(this.props.yAxis)
     const covidData = this.props.covidData.map((data) => {
       let yData = data.total
       if (this.props.yAxis === 'death') {
@@ -37,7 +37,7 @@ class Graph extends React.Component {
       const year = dateString.substring(0, 4);
       const yearNum = parseInt(year)
       const month = dateString.substring(4, 6);
-      const monthNum = parseInt(month)
+      const monthNum = parseInt(month) - 1
       const day = dateString.substring(6);
       const dayNum = parseInt(day)
       return {
@@ -46,7 +46,7 @@ class Graph extends React.Component {
         day: day
       }
     })
-    console.log(covidData.filter(data => data.day == 13))
+    // console.log(covidData.filter(data => data.day == 13))
     return (
       <div>
         <div className="graph">
@@ -85,9 +85,27 @@ class Graph extends React.Component {
             }
           >
             <VictoryAxis
-              tickValues={covidData.filter(data => data.day == 20).map((data) => {
-                return data.x
+              yAxis
+              tickValues={covidData.filter(data => {
+                let today = new Date()
+                let dd = parseInt(today.getDate())
+                let mm = parseInt(today.getMonth())
+                let yyyy = parseInt(today.getFullYear())
+                return data.day === dd //&& data.month <= mm && data.year <= yyyy
+              }).map((data) => {
+                console.log(data.x)
+                return data.x 
               })}
+              // covidData.filter(data => {
+              //   let today = new Date()
+              //   let dd = parseInt(today.getDate())
+              //   let mm = parseInt(today.getMonth())
+              //   let yyyy = parseInt(today.getFullYear())
+              //   return data.day === yyyy //&& data.month <= mm && data.year <= yyyy
+              // }).map((data) => {
+              //   console.log(data.x)
+              //   return data.x 
+              // })}
               tickFormat={(x) => new Date(x).getMonth()}
                             //REVIEW THIS 
               // tickFormat={

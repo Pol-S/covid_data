@@ -11,6 +11,7 @@ class App extends React.Component {
     this.state = {
       covidData: [],
       countryData: [],
+      countriesData: [],
       usState: "ca",
       country: 'US',
       yAxis: 'total'
@@ -29,15 +30,22 @@ class App extends React.Component {
         headers: {
           'Content-Type': 'application/json'
         }
+      }),
+      axios.get(`https://corona-api.com/countries`, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
       })
-    ]).then(([response1, response2]) => {
+    ]).then(([response1, response2, response3]) => {
       this.setState({
         covidData: response1.data,
-        countryData: response2.data.data.timeline
+        countryData: response2.data.data.timeline,
+        countriesData: response3.data.data
       })
       console.log('-----')
       console.log(response1.data)
       console.log(response2.data.data.timeline)
+      console.log(response3.data.data)
       console.log('-----')
     })
     }
@@ -63,8 +71,17 @@ class App extends React.Component {
         this.setState({
           covidData: response.data
         })
+        console.log(response.data)
       })  
   }
+
+  renderCountries = () => {
+    const render = this.state.countriesData.map((country) => {
+      return  <option value={country.code}>{country.name}</option>
+    })
+    return render
+  }
+
 
   handleCountryUpdate() {
     axios.get(`https://corona-api.com/countries/${this.state.country}`, {
@@ -74,9 +91,9 @@ class App extends React.Component {
         this.setState({
           countryData: response.data.data.timeline
         })
-        // console.log('-----')
-        // console.log(response.data)
-        // console.log('-----')
+        console.log('-----')
+        console.log(response.data)
+        console.log('-----')
       })
   }
 
@@ -168,8 +185,7 @@ class App extends React.Component {
             value={this.state.country} 
             onChange={this.handleCountryChange}
           >
-            <option value='US'>United States</option>
-            <option value='RU'>Russia</option>
+            {this.renderCountries()}
           </select>
         </label> 
       </form>    
