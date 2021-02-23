@@ -30,13 +30,13 @@ class GraphCountry extends React.Component {
       // } 
       const dateString = data.date
       const year = dateString.substring(0, 4);
-      console.log(year)
+      // console.log(year)
       const yearNum = parseInt(year)
       const month = dateString.substring(5, 7);
-      console.log(month)
-      const monthNum = parseInt(month)
+      // console.log(month)
+      const monthNum = parseInt(month) - 1
       const day = dateString.substring(8, 10);
-      console.log(day)
+      // console.log(day)
       const dayNum = parseInt(day)
       return {
         x: new Date(yearNum, monthNum, dayNum), 
@@ -44,7 +44,7 @@ class GraphCountry extends React.Component {
         day: day
       }
     })
-    console.log(covidData.filter(data => data.day == 13))
+    // console.log(covidData.filter(data => data.day == 13))
     return (
       <div>
         <div className="graph">
