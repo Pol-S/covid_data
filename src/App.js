@@ -4,6 +4,7 @@ import Graph from "./components/Graph"
 import Footer from "./components/Footer"
 import axios from "axios"
 import GraphCountry from "./components/GraphCountry"
+import { Dropdown } from 'semantic-ui-react'
 
 class App extends React.Component {
   constructor() {
@@ -107,6 +108,26 @@ class App extends React.Component {
     event.preventDefault();
   }
 
+  dropDownCountries = () => {
+    const options = this.state.countriesData.map((country) => {
+      return {key: country.code, value: country.code, text: country.name}
+    })
+    console.log(this.handleCountryChange)
+    return (
+      <div>
+        Choose a country: 
+        <Dropdown
+          placeholder='USA'
+          onChange={this.handleCountryChange}
+          value={options.value} 
+          selection
+          options={options}
+        />
+      </div>
+    )
+    
+  }
+
   render() {
     return(
       <div>
@@ -189,14 +210,15 @@ class App extends React.Component {
         yAxisCountries={this.state.yAxisCountries}
        />
       <form onSubmit={this.handleSubmit}>
-        <label>Choose a Country:
+        {this.dropDownCountries()}
+        {/* <label>Choose a Country:
           <select 
             value={this.state.country} 
             onChange={this.handleCountryChange}
           >
             {this.renderCountries()}
           </select>
-        </label> 
+        </label>  */}
       </form>    
       <form onSubmit={this.handleSubmit}>
         <label>Choose a category:
