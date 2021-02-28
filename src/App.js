@@ -21,7 +21,8 @@ class App extends React.Component {
       usState: "ca",
       country: 'US',
       yAxis: 'total',
-      yAxisCountries: 'confirmed'
+      yAxisCountries: 'confirmed',
+      countryOptions: []
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -32,6 +33,10 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    const options = this.state.countriesData.map((country) => {
+      return {key: country.code, value: country.code, text: country.name}
+    })
+
     Promise.all([
       axios.get(`https://api.covidtracking.com/v1/states/ca/daily.json`),
       axios.get(`https://corona-api.com/countries/US`, {
@@ -50,6 +55,14 @@ class App extends React.Component {
         countryData: response2.data.data.timeline,
         countriesData: response3.data.data
       })
+      const options = this.state.countriesData.map((country) => {
+        return {key: country.code, value: country.code, text: country.name}
+      })
+
+      this.setState({countryOptions: options})
+      console.log('=====')
+      console.log(this.state.countryOptions)
+      console.log('====')
       console.log('-----')
       console.log(response1.data)
       console.log(response2.data.data.timeline)
@@ -64,10 +77,8 @@ class App extends React.Component {
     this.setState({usState: event.target.value}, () => this.handleStateUpdate())
   }
 
-  handleCountryChange = (event) => {
-    this.setState({country: event.target.value}, () => this.handleCountryUpdate()
-    )
-  }
+  handleCountryChange = (e, { value }) => this.setState({ country: value }, () => this.handleCountryUpdate()
+  )
 
   handleYChange(event) {
     this.setState({yAxis: event.target.value})
@@ -87,12 +98,12 @@ class App extends React.Component {
       })  
   }
 
-  renderCountries = () => {
-    const render = this.state.countriesData.map((country) => {
-      return  <option value={country.code}>{country.name}</option>
-    })
-    return render
-  }
+  // renderCountries = () => {
+  //   const render = this.state.countriesData.map((country) => {
+  //     return  <option value={country.code}>{country.name}</option>
+  //   })
+  //   return render
+  // }
 
 
   handleCountryUpdate() {
@@ -111,27 +122,6 @@ class App extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-  }
-
-  dropDownCountries = () => {
-    const options = this.state.countriesData.map((country) => {
-      return {key: country.code, value: country.code, text: country.name}
-    })
-    console.log(this.handleCountryChange)
-    return (
-      <div>
-        Choose a country: 
-        <Dropdown
-          placeholder='USA'
-          onChange={this.handleCountryChange}
-          value={options.value} 
-          search
-          selection
-          options={options}
-        />
-      </div>
-    )
-    
   }
 
   render() {
@@ -220,7 +210,15 @@ class App extends React.Component {
           yAxisCountries={this.state.yAxisCountries}
         />
          <form onSubmit={this.handleSubmit}>
-          {this.dropDownCountries()}
+          Choose a country: 
+          <Dropdown
+            options={this.state.countryOptions}
+            placeholder='USA'
+            search
+            selection
+            value={this.state.country}
+            onChange={this.handleCountryChange}
+          />
           {/* <label>Choose a Country:
             <select 
               value={this.state.country} 
@@ -232,12 +230,12 @@ class App extends React.Component {
         </form>  
   
         <form onSubmit={this.handleSubmit}> 
-          <label>Choose a category:
-            <select value={this.state.yAxisCountries} onChange={this.handleYCountryChange}>
-              <option value='confirmed'>Total</option>
-              <option value='deaths'>Death</option>
-              <option value='recovered'>recovered</option>
-              <option value='new_deaths'>New Deaths</option>
+          <label className="label">Choose a category:
+            <select className="ui selection dropdown" value={this.state.yAxisCountries} onChange={this.handleYCountryChange}>       
+                <option className="text" value='confirmed'>Total</option>
+                <option className="text" value='deaths'>Death</option>
+                <option className="text" value='recovered'>recovered</option>
+                <option className="text" value='new_deaths'>New Deaths</option>                
             </select>
           </label> 
         </form>  
