@@ -11,11 +11,9 @@ class Graph extends React.Component {
     };
   }
   handleZoom(domain) {
-    // console.log(domain)
     this.setState({selectedDomain: domain});
   }
   handleBrush(domain) {
-    // console.log(domain)
     this.setState({zoomDomain: domain});
   }
 

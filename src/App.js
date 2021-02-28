@@ -4,10 +4,12 @@ import Header from "./components/Header"
 import Graph from "./components/Graph"
 import Footer from "./components/Footer"
 import GraphCountry from "./components/GraphCountry"
+import { Dropdown } from 'semantic-ui-react'
 import DummyGraph from "./components/DummyGraph"
 import DummyGraphCountry from "./components/DummyGraphCountry"
 import Home from "./components/Home"
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+
 
 class App extends React.Component {
   constructor() {
@@ -111,6 +113,26 @@ class App extends React.Component {
     event.preventDefault();
   }
 
+  dropDownCountries = () => {
+    const options = this.state.countriesData.map((country) => {
+      return {key: country.code, value: country.code, text: country.name}
+    })
+    console.log(this.handleCountryChange)
+    return (
+      <div>
+        Choose a country: 
+        <Dropdown
+          placeholder='USA'
+          onChange={this.handleCountryChange}
+          value={options.value} 
+          selection
+          options={options}
+        />
+      </div>
+    )
+    
+  }
+
   render() {
     return(
       <div>
@@ -122,7 +144,7 @@ class App extends React.Component {
           <Route path="/components/dummygraphcountry" component={DummyGraphCountry} />          
         </Switch>
 
-      <Graph 
+      <Graph     
           covidData={this.state.covidData}
           usState={this.state.usState}
           yAxis={this.state.yAxis}
@@ -196,16 +218,18 @@ class App extends React.Component {
           covidCountryData={this.state.countryData}
           yAxisCountries={this.state.yAxisCountries}
         />
-        <form onSubmit={this.handleSubmit}>
-          <label>Choose a Country:
+         <form onSubmit={this.handleSubmit}>
+          {this.dropDownCountries()}
+          {/* <label>Choose a Country:
             <select 
               value={this.state.country} 
               onChange={this.handleCountryChange}
             >
               {this.renderCountries()}
             </select>
-          </label> 
-        </form>    
+          </label>  */}
+        </form>  
+  
         <form onSubmit={this.handleSubmit}> 
           <label>Choose a category:
             <select value={this.state.yAxisCountries} onChange={this.handleYCountryChange}>
