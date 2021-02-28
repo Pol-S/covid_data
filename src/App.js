@@ -125,6 +125,7 @@ class App extends React.Component {
           placeholder='USA'
           onChange={this.handleCountryChange}
           value={options.value} 
+          search
           selection
           options={options}
         />
