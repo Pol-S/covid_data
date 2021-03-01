@@ -16,15 +16,16 @@ class App extends React.Component {
     super()
     this.state = {
       covidData: [],
+      usStatesData: [],
       countryData: [],
       countriesData: [],
       usState: "ca",
       country: 'US',
       yAxis: 'total',
       yAxisCountries: 'confirmed',
-      countryOptions: []
+      countryOptions: [],
+      stateOptions: []
     }
-    this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleStateUpdate = this.handleStateUpdate.bind(this)
     this.handleYChange = this.handleYChange.bind(this)
@@ -32,10 +33,69 @@ class App extends React.Component {
     this.handleYCountryChange = this.handleYCountryChange.bind(this)
   }
 
+//   selectState = (state) => {
+//     let currentState = ''
+//     const states = [
+//       {code: 'al', state: 'Alabama'},
+//       {code: 'ak', state: 'Alaska'},
+//       {code: 'az', state: 'Arizona'},
+//       {code: 'ar', state: 'Arkansas'},
+//       {code: 'ca', state: 'California'},
+//       {code: 'co', state: 'Colorado'},
+//       {code: 'ct', state: 'Connecticut'},
+//       {code: 'de', state: 'Delaware'},
+//       {code: 'fl', state: 'Florida'},
+//       {code: 'ga', state: 'Georgia'},
+//       {code: 'hi', state: 'Hawaii'},
+//       {code: 'id', state: 'Idaho'},
+//       {code: 'il', state: 'Illinois'},
+//       {code: 'in', state: 'Indiana'},
+//       {code: 'ia', state: 'Iowa'},
+//       {code: 'ks', state: 'Kansas'},
+//       {code: 'ky', state: 'Kentucky'},
+//       {code: 'la', state: 'Louisiana'},
+//       {code: 'me', state: 'Maine'},
+//       {code: 'md', state: 'Maryland'},
+//       {code: 'ma', state: 'Massachusetts'},
+//       {code: 'mi', state: 'Michigan'},
+//       {code: 'mn', state: 'Minnesota'},
+//       {code: 'mo', state: 'Missouri'},
+//       {code: 'mt', state: 'Montana'},
+//       {code: 'ne', state: 'Nebraska'},
+//       {code: 'nv', state: 'Nevada'},
+//       {code: 'nh', state: 'New Hampshire'},
+//       {code: 'nj', state: 'New Jersey'},
+//       {code: 'nm', state: 'New Mexico'},
+//       {code: 'ny', state: 'New York'},
+//       {code: 'nc', state: 'North Carolina'},
+//       {code: 'nd', state: 'North Dakota'},
+//       {code: 'oh', state: 'Ohio'},
+//       {code: 'ok', state: 'Oklahoma'},
+//       {code: 'or', state: 'Oregon'},
+//       {code: 'pa', state: 'Pennsylvania'},
+//       {code: 'ri', state: 'Rhode Island'},
+//       {code: 'sc', state: 'South Carolina'},
+//       {code: 'sd', state: 'South Dakota'},
+//       {code: 'tn', state: 'Tennessee'},
+//       {code: 'tx', state: 'Texas'},
+//       {code: 'ut', state: 'Utah'},
+//       {code: 'vt', state: 'Vermont'},
+//       {code: 'va', state: 'Virginia'},
+//       {code: 'wa', state: 'Washington'},
+//       {code: 'wv', state: 'West Virginia'},
+//       {code: 'wi', state: 'Wisconsin'},
+//       {code: 'wy', state: 'Wyoming'}
+//     ]
+//   for (let i = 0; i < states.length; i++) {
+//     if (state == states[i].code) {
+//       currentState = states[i].state
+//     }
+//   }
+//   return currentState
+// }
+
+
   componentDidMount() {
-    const options = this.state.countriesData.map((country) => {
-      return {key: country.code, value: country.code, text: country.name}
-    })
 
     Promise.all([
       axios.get(`https://api.covidtracking.com/v1/states/ca/daily.json`),
@@ -48,20 +108,88 @@ class App extends React.Component {
         headers: {
           'Content-Type': 'application/json'
         }
-      })
-    ]).then(([response1, response2, response3]) => {
+      }),
+      axios.get(`https://api.covidtracking.com/v1/states/current.json`)
+    ]).then(([response1, response2, response3, response4]) => {
       this.setState({
         covidData: response1.data,
         countryData: response2.data.data.timeline,
-        countriesData: response3.data.data
+        countriesData: response3.data.data,
+        usStatesData: response4.data
       })
+
+      let currentState = ''
+      const states = [
+        {code: 'AL', state: 'Alabama'},
+        {code: 'AK', state: 'Alaska'},
+        {code: 'AZ', state: 'Arizona'},
+        {code: 'AR', state: 'Arkansas'},
+        {code: 'CA', state: 'California'},
+        {code: 'CO', state: 'Colorado'},
+        {code: 'CT', state: 'Connecticut'},
+        {code: 'DE', state: 'Delaware'},
+        {code: 'FL', state: 'Florida'},
+        {code: 'GA', state: 'Georgia'},
+        {code: 'HI', state: 'Hawaii'},
+        {code: 'ID', state: 'Idaho'},
+        {code: 'IL', state: 'Illinois'},
+        {code: 'IN', state: 'Indiana'},
+        {code: 'IA', state: 'Iowa'},
+        {code: 'KS', state: 'Kansas'},
+        {code: 'KY', state: 'Kentucky'},
+        {code: 'LA', state: 'Louisiana'},
+        {code: 'ME', state: 'Maine'},
+        {code: 'MD', state: 'Maryland'},
+        {code: 'MA', state: 'Massachusetts'},
+        {code: 'MI', state: 'Michigan'},
+        {code: 'MN', state: 'Minnesota'},
+        {code: 'MO', state: 'Missouri'},
+        {code: 'MT', state: 'Montana'},
+        {code: 'NE', state: 'Nebraska'},
+        {code: 'NV', state: 'Nevada'},
+        {code: 'NH', state: 'New Hampshire'},
+        {code: 'NJ', state: 'New Jersey'},
+        {code: 'NM', state: 'New Mexico'},
+        {code: 'NY', state: 'New York'},
+        {code: 'NC', state: 'North Carolina'},
+        {code: 'ND', state: 'North Dakota'},
+        {code: 'OH', state: 'Ohio'},
+        {code: 'OK', state: 'Oklahoma'},
+        {code: 'OR', state: 'Oregon'},
+        {code: 'PA', state: 'Pennsylvania'},
+        {code: 'RI', state: 'Rhode Island'},
+        {code: 'SC', state: 'South Carolina'},
+        {code: 'SD', state: 'South Dakota'},
+        {code: 'TN', state: 'Tennessee'},
+        {code: 'TX', state: 'Texas'},
+        {code: 'UT', state: 'Utah'},
+        {code: 'VT', state: 'Vermont'},
+        {code: 'VA', state: 'Virginia'},
+        {code: 'WA', state: 'Washington'},
+        {code: 'WV', state: 'West Virginia'},
+        {code: 'WI', state: 'Wisconsin'},
+        {code: 'WY', state: 'Wyoming'}
+      ]
+
       const options = this.state.countriesData.map((country) => {
         return {key: country.code, value: country.code, text: country.name}
       })
+      const optionsStates = this.state.usStatesData.map((usState) => {
+      for (let i = 0; i < states.length; i++) {
+        if (usState.state == states[i].code) {
+          currentState = states[i].state
+        }
+      }
+        return {key: usState.state, value: usState.state, text: currentState}
+      })  
 
-      this.setState({countryOptions: options})
+      this.setState({
+        countryOptions: options,
+        stateOptions: optionsStates
+      })
       console.log('=====')
       console.log(this.state.countryOptions)
+      console.log(this.state.stateOptions)
       console.log('====')
       console.log('-----')
       console.log(response1.data)
@@ -73,9 +201,8 @@ class App extends React.Component {
     //API FOR ALL COUNTRIES
     // https://documenter.getpostman.com/view/10808728/SzS8rjbc#9739c95f-ef1d-489b-97a9-0a6dfe2f74d8
 
-  handleChange(event){
-    this.setState({usState: event.target.value}, () => this.handleStateUpdate())
-  }
+  handleChange = (e, { value }) => this.setState({ usState: value }, () => this.handleStateUpdate()
+  )
 
   handleCountryChange = (e, { value }) => this.setState({ country: value }, () => this.handleCountryUpdate()
   )
@@ -98,14 +225,6 @@ class App extends React.Component {
       })  
   }
 
-  // renderCountries = () => {
-  //   const render = this.state.countriesData.map((country) => {
-  //     return  <option value={country.code}>{country.name}</option>
-  //   })
-  //   return render
-  // }
-
-
   handleCountryUpdate() {
     axios.get(`https://corona-api.com/countries/${this.state.country}`, {
       headers: {'Content-Type': 'application/json'}
@@ -124,6 +243,7 @@ class App extends React.Component {
     event.preventDefault();
   }
 
+  
   render() {
     return(
       <div>
@@ -141,7 +261,16 @@ class App extends React.Component {
           yAxis={this.state.yAxis}
         />   
         <form onSubmit={this.handleSubmit}>
-          <label>Choose a State:
+          Choose a state:
+          <Dropdown
+            options={this.state.stateOptions}
+            placeholder='choose a state'
+            search
+            selection
+            value={this.state.usState}
+            onChange={this.handleChange}
+            />
+          {/* <label>Choose a State:
             <select value={this.state.usState} onChange={this.handleChange}>
               <option value='al'>Alabama</option>
               <option value='ak'>Alaska</option>
@@ -193,11 +322,11 @@ class App extends React.Component {
               <option value='wi'>Wisconsin</option>
               <option value='wy'>Wyoming</option>
             </select>
-          </label> 
+          </label>  */}
         </form>    
         <form onSubmit={this.handleSubmit}>
-          <label>Choose a category:
-            <select value={this.state.yAxis} onChange={this.handleYChange}>
+          <label className="label">Choose a category:
+            <select className="ui selection dropdown" value={this.state.yAxis} onChange={this.handleYChange}>
               <option value='total'>Total</option>
               <option value='hospitalized'>Hospitalized</option>
               <option value='death'>Death</option>
