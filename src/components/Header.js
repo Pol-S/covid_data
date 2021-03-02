@@ -6,13 +6,10 @@ function Header() {
     <header>
       Placeholder Header "Covid and You"
       <ul>
-        <Link to="/components/home">
-          <li>Home Page</li>
-        </Link>
-        <Link to="/components/dummygraph">
+        <Link to="/components/usastates">
           <li>Compare U.S. States</li>
         </Link>
-        <Link to="/components/dummygraphcountry">
+        <Link to="/components/countries">
           <li>Compare Countries</li>
         </Link>
       </ul>
