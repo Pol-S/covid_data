@@ -6,7 +6,7 @@ function Header() {
     <header>
       Placeholder Header "Covid and You"
       <ul>
-        <Link to="/components/usastates">
+        <Link to="/">
           <li>Compare U.S. States</li>
         </Link>
         <Link to="/components/countries">

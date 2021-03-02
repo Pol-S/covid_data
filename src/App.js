@@ -12,8 +12,8 @@ class App extends React.Component {
       <Router>
       <Header />
       <Switch>         
-        <Route path="/components/usastates" component={USAStates} />     
-        <Route path="/components/countries" component={Countries} />  
+        <Route path="/components/countries" component={Countries} />
+        <Route path="/" component={USAStates} />  
       </Switch>
       <Footer />
       </Router>
