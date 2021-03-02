@@ -10,10 +10,12 @@ class Graph extends React.Component {
     this.state = {
     };
   }
-  handleZoom(domain) {
+  handleZoom = (domain) => {
+    console.log('handlezoom', domain, 'selectedDomain', this.state.selectedDomain)
     this.setState({selectedDomain: domain});
   }
-  handleBrush(domain) {
+  handleBrush = (domain) => {
+    console.log('handlebrush', domain, 'zoomdomain', this.state.zoomDomain)
     this.setState({zoomDomain: domain});
   }
 
@@ -57,7 +59,7 @@ class Graph extends React.Component {
               <VictoryZoomContainer responsive={false}
                 zoomDimension="x"
                 zoomDomain={this.state.zoomDomain}
-                onZoomDomainChange={this.handleZoom.bind(this)}
+                onZoomDomainChange={this.handleZoom}
               />
             }
           >
@@ -78,18 +80,15 @@ class Graph extends React.Component {
               <VictoryBrushContainer responsive={false}
                 brushDimension="x"
                 brushDomain={this.state.selectedDomain}
-                onBrushDomainChange={this.handleBrush.bind(this)}
+                onBrushDomainChange={this.handleBrush}
               />
             }
           >
             <VictoryAxis
-              yAxis
               tickValues={covidData.filter(data => {
                 let today = new Date()
                 let dd = parseInt(today.getDate())
-                let mm = parseInt(today.getMonth())
-                let yyyy = parseInt(today.getFullYear())
-                return data.day === dd //&& data.month <= mm && data.year <= yyyy
+                return data.day === dd 
               }).map((data) => {
                 console.log(data.x)
                 return data.x 
@@ -129,18 +128,5 @@ class Graph extends React.Component {
     );
   }
 }
-// [
-//   new Date(2020, 3, 4),
-//   new Date(2020, 4, 4),
-//   new Date(2020, 5, 4),
-//   new Date(2020, 6, 4),
-//   new Date(2020, 7, 4),
-//   new Date(2020, 8, 4),
-//   new Date(2020, 9, 4),
-//   new Date(2020, 10, 4),
-//   new Date(2020, 11, 4),
-//   new Date(2020, 12, 4),
-//   new Date(2021, 1, 4),
-//   new Date(2021, 2, 4),
-// ]
+
 export default Graph

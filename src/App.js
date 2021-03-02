@@ -124,12 +124,15 @@ class App extends React.Component {
         {code: 'AK', state: 'Alaska'},
         {code: 'AZ', state: 'Arizona'},
         {code: 'AR', state: 'Arkansas'},
+        {code: 'AS', state: 'American Samoa'},
         {code: 'CA', state: 'California'},
         {code: 'CO', state: 'Colorado'},
         {code: 'CT', state: 'Connecticut'},
         {code: 'DE', state: 'Delaware'},
+        {code: 'DC', state: 'Distric of Columbia'},
         {code: 'FL', state: 'Florida'},
         {code: 'GA', state: 'Georgia'},
+        {code: 'GU', state: 'Guam'},
         {code: 'HI', state: 'Hawaii'},
         {code: 'ID', state: 'Idaho'},
         {code: 'IL', state: 'Illinois'},
@@ -142,8 +145,10 @@ class App extends React.Component {
         {code: 'MD', state: 'Maryland'},
         {code: 'MA', state: 'Massachusetts'},
         {code: 'MI', state: 'Michigan'},
+        {code: 'MP', state: 'Nothern Mariana Islands'},
         {code: 'MN', state: 'Minnesota'},
         {code: 'MO', state: 'Missouri'},
+        {code: 'MS', state: 'Mississippi'},
         {code: 'MT', state: 'Montana'},
         {code: 'NE', state: 'Nebraska'},
         {code: 'NV', state: 'Nevada'},
@@ -157,6 +162,7 @@ class App extends React.Component {
         {code: 'OK', state: 'Oklahoma'},
         {code: 'OR', state: 'Oregon'},
         {code: 'PA', state: 'Pennsylvania'},
+        {code: 'PR', state: 'Puerto Rico'},
         {code: 'RI', state: 'Rhode Island'},
         {code: 'SC', state: 'South Carolina'},
         {code: 'SD', state: 'South Dakota'},
@@ -168,7 +174,8 @@ class App extends React.Component {
         {code: 'WA', state: 'Washington'},
         {code: 'WV', state: 'West Virginia'},
         {code: 'WI', state: 'Wisconsin'},
-        {code: 'WY', state: 'Wyoming'}
+        {code: 'WY', state: 'Wyoming'},
+        {code: 'VI', state: 'Virgin Islands'}
       ]
 
       const options = this.state.countriesData.map((country) => {
