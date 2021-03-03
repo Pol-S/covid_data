@@ -32,6 +32,8 @@ class GraphCountry extends React.Component {
         yData = data.recovered
       } else if (this.props.yAxisCountries === 'new_deaths') {
         yData = data.new_deaths
+      } else if (this.props.yAxisCountries === 'active') {
+        yData = data.active
       } 
       const dateString = data.date
       const year = dateString.substring(0, 4);

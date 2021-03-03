@@ -107,6 +107,7 @@ class Countries extends React.Component {
                 <option className="text" value='deaths'>Death</option>
                 <option className="text" value='recovered'>recovered</option>
                 <option className="text" value='new_deaths'>New Deaths</option>                
+                <option className="text" value='active'>active cases</option>                
             </select>
           </label> 
         </form>  

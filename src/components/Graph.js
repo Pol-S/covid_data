@@ -32,6 +32,10 @@ class Graph extends React.Component {
         yData = data.total
       } else if (this.props.yAxis === 'deathIncrease') {
         yData = data.deathIncrease
+      } else if (this.props.yAxis === 'positiveIncrease') {
+        yData = data.positiveIncrease
+      } else if (this.props.yAxis === 'inIcuCurrently') {
+        yData = data.inIcuCurrently
       } 
       const dateString = data.date.toString();
       const year = dateString.substring(0, 4);

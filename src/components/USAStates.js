@@ -148,7 +148,7 @@ class USAStates extends React.Component {
           Choose a state:
           <Dropdown
             options={this.state.stateOptions}
-            placeholder='choose a state'
+            placeholder='California'
             search
             selection
             value={this.state.usState}
@@ -162,6 +162,8 @@ class USAStates extends React.Component {
               <option value='hospitalized'>Hospitalized</option>
               <option value='death'>Death</option>
               <option value='deathIncrease'>Death Increase</option>
+              <option value='positiveIncrease'>Daily Cases</option>
+              <option value='inIcuCurrently'>ICU currently</option>
             </select>
           </label> 
         </form>  
