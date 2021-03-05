@@ -8,6 +8,7 @@ class Graph extends React.Component {
   constructor() {
     super();
     this.state = {
+      zoomDomain: null
     };
   }
   handleZoom = (domain) => {
@@ -19,6 +20,13 @@ class Graph extends React.Component {
     this.setState({zoomDomain: domain});
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.usState !== this.props.usState) {
+      this.setState({
+        zoomDomain: null
+      })
+    }
+  }
 
   render() {
     // console.log(this.props.yAxis)

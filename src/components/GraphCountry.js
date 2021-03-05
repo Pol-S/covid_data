@@ -16,10 +16,13 @@ class GraphCountry extends React.Component {
     this.setState({zoomDomain: domain});
   }
 
-  handleFakeZoom() {
-    // const dummyDomain = {{[-1, 1]}};
-    // this.setState(selectedDomain: dummyDomain);
-  }
+ componentDidUpdate(prevProps) {
+   if (prevProps.country !== this.props.country) {
+     this.setState({
+       zoomDomain: null
+     })
+   }
+ }
 
   render() {
     const covidData = this.props.covidCountryData.map((data) => {

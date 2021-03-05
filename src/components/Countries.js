@@ -88,6 +88,7 @@ class Countries extends React.Component {
         <GraphCountry 
           covidCountryData={this.state.countryData}
           yAxisCountries={this.state.yAxisCountries}
+          country={this.state.country}
         />
          <form onSubmit={this.handleSubmit}>
           Choose a country: 
