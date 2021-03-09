@@ -7,7 +7,21 @@ class Graph extends React.Component {
   constructor() {
     super();
     this.state = {
-      zoomDomain: null
+      zoomDomain: null,
+      months: {
+        0: "Jan",
+        1: "Feb",
+        2: "Mar",
+        3: "Apr",
+        4: "May",
+        5: "June",
+        6: "July",
+        7: "Aug",
+        8: "Sep",
+        9: "Oct",
+        10: "Nov",
+        11: "Dec"
+      }
     };
   }
   handleZoom = (domain) => {
@@ -60,11 +74,11 @@ class Graph extends React.Component {
     // console.log(covidData.filter(data => data.day == 13))
     return (
       <div>
-        <div className="graph">
+        <div>
           <VictoryChart
             width={600}
             height={300}
-            padding={{top: 0, left: 100, right: 50, bottom: 30}}
+            padding={{top: 10, left: 100, right: 50, bottom: 30}}
             scale={{x: "time"}}
             containerComponent={
               <VictoryZoomContainer responsive={false}
@@ -74,6 +88,7 @@ class Graph extends React.Component {
               />
             }
           >
+            
             <VictoryLine
             className="victory"
               style={{
@@ -96,42 +111,26 @@ class Graph extends React.Component {
             }
           >
             <VictoryAxis
-              tickValues={covidData.filter(data => {
-                let today = new Date()
-                let dd = parseInt(today.getDate())
-                return data.day === dd 
-              }).map((data) => {
-                console.log(data.x)
-                return data.x 
+              tickValues={covidData.filter(data => data.day == 20).map((data) => {
+                return data.x
               })}
-              // covidData.filter(data => {
+              // tickValues={covidData.filter(data => {
               //   let today = new Date()
               //   let dd = parseInt(today.getDate())
-              //   let mm = parseInt(today.getMonth())
-              //   let yyyy = parseInt(today.getFullYear())
-              //   return data.day === yyyy //&& data.month <= mm && data.year <= yyyy
+              //   return data.day === dd 
               // }).map((data) => {
               //   console.log(data.x)
               //   return data.x 
               // })}
-              tickFormat={(x) => new Date(x).getMonth()}
-                            //REVIEW THIS 
-              // tickFormat={
-              //   (x) => {
-              //     if (x.getFullYear() === 2000) {
-              //       return x.getFullYear();
-              //     }
-              //     if (x.getFullYear() % 5 === 0) {
-              //       return x.getFullYear().toString().slice(2);
-              //     }
-              //   }
-              // }
+              tickFormat={(x) => `${this.state.months[x.getMonth()]}`}
+              
             />
             <VictoryLine
               style={{
                 data: {stroke: "tomato"}
               }}
               data={covidData}
+              // labels={( datum ) => `${this.state.months[datum.x]}`}
             />
           </VictoryChart>
           </div>
