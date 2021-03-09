@@ -8,14 +8,18 @@ function Header() {
       <div className="banner">
       Covid Data Tracker
       </div>
-      <ul>
+      <div>
         <Link to="/">
-          <li>Compare U.S. States</li>
+          <button className="ui left attached button">
+            Compare U.S. States
+          </button>
         </Link>
         <Link to="/components/countries">
-          <li>Compare Countries</li>
+          <button className="right attached ui button">
+            Compare Countries
+          </button>
         </Link>
-      </ul>
+        </div>
       <hr></hr>
     </header>
   )

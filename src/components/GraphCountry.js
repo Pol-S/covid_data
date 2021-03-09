@@ -5,6 +5,20 @@ class GraphCountry extends React.Component {
   constructor() {
     super()
     this.state = {
+      months: {
+        0: "Jan",
+        1: "Feb",
+        2: "Mar",
+        3: "Apr",
+        4: "May",
+        5: "June",
+        6: "July",
+        7: "Aug",
+        8: "Sep",
+        9: "Oct",
+        10: "Nov",
+        11: "Dec"
+      }
     }
   }
 
@@ -61,7 +75,7 @@ class GraphCountry extends React.Component {
           <VictoryChart
             width={600}
             height={300}
-            padding={{top: 0, left: 100, right: 50, bottom: 30}}
+            padding={{top: 10, left: 100, right: 50, bottom: 30}}
             scale={{x: "time"}}
             containerComponent={
               <VictoryZoomContainer responsive={false}
@@ -96,7 +110,7 @@ class GraphCountry extends React.Component {
               tickValues={covidData.filter(data => data.day == 20).map((data) => {
                 return data.x
               })}
-              tickFormat={(x) => new Date(x).getMonth()}
+              tickFormat={(x) => `${this.state.months[x.getMonth()]}`}
                             //REVIEW THIS 
               // tickFormat={
               //   (x) => {
