@@ -1,6 +1,7 @@
 import React from "react"
 import axios from "axios"
 import Graph from "./Graph"
+import "../styling/USAStates.css"
 import { Dropdown } from 'semantic-ui-react'
 
 class USAStates extends React.Component {
@@ -154,7 +155,8 @@ class USAStates extends React.Component {
             value={this.state.usState}
             onChange={this.handleChange}
             />
-        </form>    
+        </form>  
+          
         <form onSubmit={this.handleSubmit}>
           <label className="label">Choose a category:
             <select className="ui selection dropdown" value={this.state.yAxis} onChange={this.handleYChange}>

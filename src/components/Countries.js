@@ -2,6 +2,7 @@ import React from "react"
 import axios from "axios"
 import GraphCountry from "./GraphCountry"
 import { Dropdown } from 'semantic-ui-react'
+import "../styling/Countries.css"
 
 class Countries extends React.Component {
   constructor() {
