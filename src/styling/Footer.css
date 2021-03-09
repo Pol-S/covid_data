@@ -5,6 +5,8 @@
   text-align: left;
   align-items: center;
   background-color: firebrick;
-  height: 50px;
   display: block;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
 }
