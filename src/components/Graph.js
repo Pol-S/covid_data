@@ -1,7 +1,6 @@
 import React from "react"
 import * as V from "victory";
 import { VictoryLine, VictoryChart, VictoryAxis, VictoryBrushContainer, VictoryZoomContainer } from 'victory';
-import './Graph.css'
 import moment from 'moment'
 
 class Graph extends React.Component {

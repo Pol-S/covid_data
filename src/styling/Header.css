@@ -1,0 +1,10 @@
+.banner {
+  color: whitesmoke;
+  font-size: xx-large;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  background-color: firebrick;
+  height: 100px;
+  display: flex;
+}

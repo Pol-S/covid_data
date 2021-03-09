@@ -1,0 +1,10 @@
+.footer {
+  color: whitesmoke;
+  font-size: small;
+  justify-content: left;
+  text-align: left;
+  align-items: center;
+  background-color: firebrick;
+  height: 50px;
+  display: block;
+}
