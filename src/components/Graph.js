@@ -39,6 +39,11 @@ class Graph extends React.Component {
         zoomDomain: null
       })
     }
+    if (prevProps.yAxis !== this.props.yAxis) {
+      this.setState({
+        zoomDomain: null
+      })
+    }
   }
 
   render() {
