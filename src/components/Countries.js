@@ -107,9 +107,9 @@ class Countries extends React.Component {
             <select className="ui selection dropdown" value={this.state.yAxisCountries} onChange={this.handleYCountryChange}>       
                 <option className="text" value='confirmed'>Total</option>
                 <option className="text" value='deaths'>Death</option>
-                <option className="text" value='recovered'>recovered</option>
-                <option className="text" value='new_deaths'>New Deaths</option>                
-                <option className="text" value='active'>active cases</option>                
+                <option className="text" value='recovered'>Recovered</option>
+                <option className="text" value='new_deaths'>New Deaths</option>                           
+                <option className="text" value='new_confirmed'>New Cases</option>                
             </select>
           </label> 
         </form>  

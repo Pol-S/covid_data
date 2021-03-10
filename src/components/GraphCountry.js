@@ -36,6 +36,11 @@ class GraphCountry extends React.Component {
        zoomDomain: null
      })
    }
+   if (prevProps.yAxisCountries !== this.props.yAxisCountries) {
+    this.setState({
+      zoomDomain: null
+    })
+  }
  }
 
   render() {
@@ -49,8 +54,8 @@ class GraphCountry extends React.Component {
         yData = data.recovered
       } else if (this.props.yAxisCountries === 'new_deaths') {
         yData = data.new_deaths
-      } else if (this.props.yAxisCountries === 'active') {
-        yData = data.active
+      } else if (this.props.yAxisCountries === 'new_confirmed') {
+        yData = data.new_confirmed
       } 
       const dateString = data.date
       const year = dateString.substring(0, 4);
