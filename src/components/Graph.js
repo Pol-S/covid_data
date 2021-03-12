@@ -49,26 +49,38 @@ class Graph extends React.Component {
   render() {
     // console.log(this.props.yAxis)
     const covidData = this.props.covidData.map((data) => {
-      let yData = data.total
-      if (this.props.yAxis === 'death') {
-        yData = data.death
+      let yData = data.cases
+      if (this.props.yAxis === 'deaths') {
+        yData = data.deaths
       } else if ( this.props.yAxis === 'hospitalized') {
-        yData = data.hospitalizedCurrently
+        yData = data.hospitalBeds.currentUsageCovid
       } else if ( this.props.yAxis === 'total') {
-        yData = data.total
-      } else if (this.props.yAxis === 'deathIncrease') {
-        yData = data.deathIncrease
-      } else if (this.props.yAxis === 'positiveIncrease') {
-        yData = data.positiveIncrease
-      } else if (this.props.yAxis === 'inIcuCurrently') {
-        yData = data.inIcuCurrently
-      } 
+        yData = data.cases
+      } else if (this.props.yAxis === 'newDeaths') {
+        yData = data.newDeaths
+      } else if (this.props.yAxis === 'newCases') {
+        yData = data.newCases
+      } else if (this.props.yAxis === 'currentUsageCovid') {
+        yData = data.icuBeds.currentUsageCovid
+      } else if (this.props.yAxis === 'vaccinationsCompleted') {
+        if (data.vaccinationsCompleted) {
+          yData = data.vaccinationsCompleted
+        } else {
+          yData = null
+        }
+      } else if (this.props.yAxis === 'vaccinesDistributed') {
+        if (data.vaccinesDistributed) {
+          yData = data.vaccinesDistributed
+        } else {
+          yData = null
+        }
+      }
       const dateString = data.date.toString();
       const year = dateString.substring(0, 4);
       const yearNum = parseInt(year)
-      const month = dateString.substring(4, 6);
+      const month = dateString.substring(5, 7);
       const monthNum = parseInt(month) - 1
-      const day = dateString.substring(6);
+      const day = dateString.substring(8);
       const dayNum = parseInt(day)
       return {
         x: new Date(yearNum, monthNum, dayNum), 

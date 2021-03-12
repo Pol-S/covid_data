@@ -11,7 +11,7 @@ class USAStates extends React.Component {
       covidData: [],
       usStatesData: [],
       usState: "ca",
-      yAxis: 'total',
+      yAxis: 'cases',
       stateOptions: []
     }
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -23,13 +23,17 @@ class USAStates extends React.Component {
   componentDidMount() {
 
     Promise.all([
-      axios.get(`https://api.covidtracking.com/v1/states/ca/daily.json`),
-      axios.get(`https://api.covidtracking.com/v1/states/current.json`)
+      axios.get(`https://api.covidactnow.org/v2/state/CA.timeseries.json?apiKey=7a39cf0e85284f04ae5c28ddf433ed36`),
+      axios.get(`https://api.covidactnow.org/v2/states.timeseries.json?apiKey=7a39cf0e85284f04ae5c28ddf433ed36`)
     ]).then(([response1, response2]) => {
       this.setState({
-        covidData: response1.data,
+        covidData: response1.data.actualsTimeseries,
         usStatesData: response2.data
       })
+      console.log(response1.data)
+
+      //API KEY:  7a39cf0e85284f04ae5c28ddf433ed36
+      // https://api.covidactnow.org/v2/state/MA.timeseries.json?apiKey=7a39cf0e85284f04ae5c28ddf433ed36
 
       let currentState = ''
       const states = [
@@ -105,7 +109,6 @@ class USAStates extends React.Component {
       })
       // console.log('=====')
       // console.log(this.state.countryOptions)
-      // console.log(this.state.stateOptions)
       // console.log('====')
       // console.log('-----')
       // console.log(response1.data)
@@ -123,10 +126,10 @@ class USAStates extends React.Component {
   }
 
   handleStateUpdate() {
-    axios.get(`https://api.covidtracking.com/v1/states/${this.state.usState}/daily.json`)
+    axios.get(`https://api.covidactnow.org/v2/state/${this.state.usState}.timeseries.json?apiKey=7a39cf0e85284f04ae5c28ddf433ed36`)
       .then(response => {
         this.setState({
-          covidData: response.data
+          covidData: response.data.actualsTimeseries
         })
         console.log(response.data)
       })  
@@ -162,10 +165,12 @@ class USAStates extends React.Component {
             <select className="ui selection dropdown" value={this.state.yAxis} onChange={this.handleYChange}>
               <option value='total'>Total</option>
               <option value='hospitalized'>Hospitalized</option>
-              <option value='death'>Death</option>
-              <option value='deathIncrease'>Death Increase</option>
-              <option value='positiveIncrease'>Daily Cases</option>
-              <option value='inIcuCurrently'>ICU currently</option>
+              <option value='deaths'>Death</option>
+              <option value='newDeaths'>daily deaths</option>
+              <option value='newCases'>Daily Cases</option>
+              <option value='currentUsageCovid'>ICU currently</option>
+              <option value='vaccinationsCompleted'>vaccinations completed</option>
+              <option value='vaccinesDistributed'>vaccinations distributed</option>
             </select>
           </label> 
         </form>  
