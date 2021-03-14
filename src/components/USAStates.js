@@ -3,12 +3,14 @@ import axios from "axios"
 import Graph from "./Graph"
 import "../styling/USAStates.css"
 import { Dropdown } from 'semantic-ui-react'
+import USDataBlock from "./USDataBlock"
 
 class USAStates extends React.Component {
   constructor() {
     super()
     this.state = {
       covidData: [],
+      currentCovidData: [],
       usStatesData: [],
       usState: "ca",
       yAxis: 'cases',
@@ -24,11 +26,13 @@ class USAStates extends React.Component {
 
     Promise.all([
       axios.get(`https://api.covidactnow.org/v2/state/CA.timeseries.json?apiKey=7a39cf0e85284f04ae5c28ddf433ed36`),
-      axios.get(`https://api.covidactnow.org/v2/states.timeseries.json?apiKey=7a39cf0e85284f04ae5c28ddf433ed36`)
-    ]).then(([response1, response2]) => {
+      axios.get(`https://api.covidactnow.org/v2/states.timeseries.json?apiKey=7a39cf0e85284f04ae5c28ddf433ed36`),
+      axios.get(`https://api.covidactnow.org/v2/state/CA.timeseries.json?apiKey=7a39cf0e85284f04ae5c28ddf433ed36`)
+    ]).then(([response1, response2, response3]) => {
       this.setState({
         covidData: response1.data.actualsTimeseries,
-        usStatesData: response2.data
+        usStatesData: response2.data,
+        currentCovidData: response3.data
       })
       console.log(response1.data)
 
@@ -129,10 +133,11 @@ class USAStates extends React.Component {
     axios.get(`https://api.covidactnow.org/v2/state/${this.state.usState}.timeseries.json?apiKey=7a39cf0e85284f04ae5c28ddf433ed36`)
       .then(response => {
         this.setState({
-          covidData: response.data.actualsTimeseries
+          covidData: response.data.actualsTimeseries,
+          currentCovidData: response.data          
         })
         console.log(response.data)
-      })  
+      })   
   }
 
   handleSubmit(event) {
@@ -174,6 +179,9 @@ class USAStates extends React.Component {
             </select>
           </label> 
         </form>  
+        <USDataBlock 
+          currentCovidData={this.state.currentCovidData}
+        />
       </div>
     )
   }
