@@ -1,31 +1,77 @@
+import "../styling/USDataBlock.css"
 import React from "react"
 
 class USDataBlock extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      deaths: ""
-    }
-  }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      deaths: nextProps.currentCovidData.actuals.deaths
-    }),
-    console.log(this.state.deaths)
-  }
 
   render() {
+    const roundICUPercentage = Math.round(this.props.ICUCapacityPercentage * 100)
     return (
-      <div>
-        {/* Deaths: {this.props.currentCovidData.actuals.deaths}
-        Cases: {this.props.currentCovidData.actuals.cases}
-        Vaccines distributed: {this.props.currentCovidData.actuals.vaccinesDistributed}
-        Vaccines completed: {this.props.currentCovidData.actuals.vaccinationsCompleted}
-        Risk level: {this.props.currentCovidData.risklevels.overall}
-        ICU capacity percentage: {this.props.currentCovidData.metrics.icuCapacityRatio}
-        New cases: {this.props.currentCovidData.actuals.newCases}
-        New deaths: {this.props.currentCovidData.actuals.newDeaths} */}
+      <div className="ui mini statistics">
+        <div className="statistic">
+          <div className="value">
+            {this.props.deaths}
+          </div>
+          <div className="label">
+            Deaths
+          </div>
+        </div>
+        <div className="statistic">
+          <div className="value">
+            {this.props.cases}
+          </div>
+          <div className="label">
+            Cases
+          </div>
+        </div>
+        <div className="statistic">
+          <div className="value">
+            {this.props.vaccinesDistributed}
+          </div>
+          <div className="label">
+            Vaccines Distributed
+          </div>
+        </div>
+        <div className="statistic">
+          <div className="value">
+            {this.props.vaccinesCompleted}
+          </div>
+          <div className="label">
+            Vaccines Completed
+          </div>
+        </div>
+        <div className={this.props.riskLevel === 0 ? `blue statistic` : this.props.riskLevel === 1 ? `green statistic` : this.props.riskLevel === 2 ? `yellow statistic` : this.props.riskLevel === 3 ? `orange statistic` : this.props.riskLevel === 4 ? `grey statistic` : `red statistic` }>
+          <div className="value">
+            {this.props.riskLevel}
+          </div>
+          <div className="label">
+            Risk Level
+          </div>
+        </div>
+        <div className={ roundICUPercentage > 75 ? `red statistic` : roundICUPercentage > 50 ? `orange statistic` : `yellow statistic`}>
+          <div className="value">
+            {roundICUPercentage}%
+          </div>
+          <div className="label">
+            ICU Capacity Percentage
+          </div>
+        </div>
+        <div className="statistic">
+          <div className="value">
+            {this.props.newCases}
+          </div>
+          <div className="label">
+            New Cases
+          </div>
+        </div>
+        <div className="statistic">
+          <div className="value">
+            {this.props.newDeaths }
+          </div>
+          <div className="label">
+            New Deaths
+          </div>
+        </div>
       </div>
     ) 
   }
@@ -33,3 +79,5 @@ class USDataBlock extends React.Component {
 }
 
 export default USDataBlock
+
+

@@ -14,7 +14,15 @@ class USAStates extends React.Component {
       usStatesData: [],
       usState: "ca",
       yAxis: 'cases',
-      stateOptions: []
+      stateOptions: [],
+      deaths: 0,
+      cases: 0,
+      vaccinesDistributed: 0,
+      vaccinesCompleted: 0,
+      riskLevel: 0,
+      ICUCapacityPercentage: 0,
+      newCases: 0,
+      newDeaths: 0
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleStateUpdate = this.handleStateUpdate.bind(this)
@@ -32,7 +40,15 @@ class USAStates extends React.Component {
       this.setState({
         covidData: response1.data.actualsTimeseries,
         usStatesData: response2.data,
-        currentCovidData: response3.data
+        currentCovidData: response3.data,
+        deaths: response1.data.actuals.deaths,
+        cases: response1.data.actuals.cases,
+        vaccinesDistributed: response1.data.actuals.vaccinesDistributed,
+        vaccinesCompleted: response1.data.actuals.vaccinationsCompleted,
+        riskLevel: response1.data.riskLevels.overall,
+        ICUCapacityPercentage: response1.data.metrics.icuCapacityRatio,
+        newCases: response1.data.actuals.newCases,
+        newDeaths: response1.data.actuals.newDeaths
       })
       console.log(response1.data)
 
@@ -134,7 +150,15 @@ class USAStates extends React.Component {
       .then(response => {
         this.setState({
           covidData: response.data.actualsTimeseries,
-          currentCovidData: response.data          
+          currentCovidData: response.data,
+          deaths: response.data.actuals.deaths,
+          cases: response.data.actuals.cases,
+          vaccinesDistributed: response.data.actuals.vaccinesDistributed,
+          vaccinesCompleted: response.data.actuals.vaccinationsCompleted,
+          riskLevel: response.data.riskLevels.overall,
+          ICUCapacityPercentage: response.data.metrics.icuCapacityRatio,
+          newCases: response.data.actuals.newCases,
+          newDeaths: response.data.actuals.newDeaths      
         })
         console.log(response.data)
       })   
@@ -180,7 +204,14 @@ class USAStates extends React.Component {
           </label> 
         </form>  
         <USDataBlock 
-          currentCovidData={this.state.currentCovidData}
+          deaths={this.state.deaths}
+          cases={this.state.cases}
+          vaccinesDistributed={this.state.vaccinesDistributed}
+          vaccinesCompleted={this.state.vaccinesCompleted}
+          riskLevel={this.state.riskLevel}
+          ICUCapacityPercentage={this.state.ICUCapacityPercentage}
+          newCases={this.state.newCases}
+          newDeaths={this.state.newDeaths}
         />
       </div>
     )
