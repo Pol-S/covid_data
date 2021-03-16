@@ -8,6 +8,7 @@ class USDataBlock extends React.Component {
     const roundICUPercentage = Math.round(this.props.ICUCapacityPercentage * 100)
     return (
       <div className="statistics">
+        {this.props.handleStateChange}
         <div className="ui mini statistics">
           <div className={this.props.riskLevel === 0 ? `blue statistic` : this.props.riskLevel === 1 ? `green statistic` : this.props.riskLevel === 2 ? `yellow statistic` : this.props.riskLevel === 3 ? `orange statistic` : this.props.riskLevel === 4 ? `grey statistic` : `red statistic` }>
             <div className="value">
