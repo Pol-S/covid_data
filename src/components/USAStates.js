@@ -171,48 +171,52 @@ class USAStates extends React.Component {
   
   render() {
     return(
-      <div>
-        <Graph     
+      <div className="ui stackable grid middle aligned">
+        <div class="eight wide column">
+          <Graph     
             covidData={this.state.covidData}
             usState={this.state.usState}
             yAxis={this.state.yAxis}
-        />   
-        <form onSubmit={this.handleSubmit}>
-          Choose a state:
-          <Dropdown
-            options={this.state.stateOptions}
-            placeholder='California'
-            search
-            selection
-            value={this.state.usState}
-            onChange={this.handleChange}
-            />
-        </form>  
-          
-        <form onSubmit={this.handleSubmit}>
-          <label className="label">Choose a category:
-            <select className="ui selection dropdown" value={this.state.yAxis} onChange={this.handleYChange}>
-              <option value='total'>Total</option>
-              <option value='hospitalized'>Hospitalized</option>
-              <option value='deaths'>Death</option>
-              <option value='newDeaths'>daily deaths</option>
-              <option value='newCases'>Daily Cases</option>
-              <option value='currentUsageCovid'>ICU currently</option>
-              <option value='vaccinationsCompleted'>vaccinations completed</option>
-              <option value='vaccinesDistributed'>vaccinations distributed</option>
-            </select>
-          </label> 
-        </form>  
-        <USDataBlock 
-          deaths={this.state.deaths}
-          cases={this.state.cases}
-          vaccinesDistributed={this.state.vaccinesDistributed}
-          vaccinesCompleted={this.state.vaccinesCompleted}
-          riskLevel={this.state.riskLevel}
-          ICUCapacityPercentage={this.state.ICUCapacityPercentage}
-          newCases={this.state.newCases}
-          newDeaths={this.state.newDeaths}
-        />
+          />   
+          <form onSubmit={this.handleSubmit}>
+            Choose a state:
+            <Dropdown
+              options={this.state.stateOptions}
+              placeholder='California'
+              search
+              selection
+              value={this.state.usState}
+              onChange={this.handleChange}
+              />
+          </form>  
+            
+          <form onSubmit={this.handleSubmit}>
+                  <label className="label">Choose a category:
+                    <select className="ui selection dropdown" value={this.state.yAxis} onChange={this.handleYChange}>
+                      <option value='total'>Total</option>
+                      <option value='hospitalized'>Hospitalized</option>
+                      <option value='deaths'>Death</option>
+                      <option value='newDeaths'>daily deaths</option>
+                      <option value='newCases'>Daily Cases</option>
+                      <option value='currentUsageCovid'>ICU currently</option>
+                      <option value='vaccinationsCompleted'>vaccinations completed</option>
+                      <option value='vaccinesDistributed'>vaccinations distributed</option>
+                    </select>
+                  </label> 
+                </form>  
+        </div>
+        <div class="eight wide column">
+          <USDataBlock 
+            deaths={this.state.deaths}
+            cases={this.state.cases}
+            vaccinesDistributed={this.state.vaccinesDistributed}
+            vaccinesCompleted={this.state.vaccinesCompleted}
+            riskLevel={this.state.riskLevel}
+            ICUCapacityPercentage={this.state.ICUCapacityPercentage}
+            newCases={this.state.newCases}
+            newDeaths={this.state.newDeaths}
+          />
+        </div>
       </div>
     )
   }
