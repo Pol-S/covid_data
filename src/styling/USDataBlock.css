@@ -1,6 +1,9 @@
-
-
 .statistics {
-  vertical-align: middle; 
+  vertical-align: middle;
   text-align: center;
+}
+
+.state-name {
+  vertical-align: middle;
+  text-align: left;
 }
