@@ -10,7 +10,6 @@ class USAStates extends React.Component {
     super()
     this.state = {
       covidData: [],
-      currentCovidData: [],
       usStatesData: [],
       currentUsState: 'California',
       usState: "ca",
@@ -35,13 +34,11 @@ class USAStates extends React.Component {
 
     Promise.all([
       axios.get(`https://api.covidactnow.org/v2/state/CA.timeseries.json?apiKey=7a39cf0e85284f04ae5c28ddf433ed36`),
-      axios.get(`https://api.covidactnow.org/v2/states.timeseries.json?apiKey=7a39cf0e85284f04ae5c28ddf433ed36`),
-      axios.get(`https://api.covidactnow.org/v2/state/CA.timeseries.json?apiKey=7a39cf0e85284f04ae5c28ddf433ed36`)
-    ]).then(([response1, response2, response3]) => {
+      axios.get(`https://api.covidactnow.org/v2/states.json?apiKey=7a39cf0e85284f04ae5c28ddf433ed36`)
+    ]).then(([response1, response2]) => {
       this.setState({
         covidData: response1.data.actualsTimeseries,
         usStatesData: response2.data,
-        currentCovidData: response3.data,
         deaths: response1.data.actuals.deaths,
         cases: response1.data.actuals.cases,
         vaccinesDistributed: response1.data.actuals.vaccinesDistributed,
@@ -269,11 +266,11 @@ class USAStates extends React.Component {
                       <option value='total'>Total</option>
                       <option value='hospitalized'>Hospitalized</option>
                       <option value='deaths'>Death</option>
-                      <option value='newDeaths'>daily deaths</option>
+                      <option value='newDeaths'>Daily Deaths</option>
                       <option value='newCases'>Daily Cases</option>
                       <option value='currentUsageCovid'>ICU currently</option>
-                      <option value='vaccinationsCompleted'>vaccinations completed</option>
-                      <option value='vaccinesDistributed'>vaccinations distributed</option>
+                      <option value='vaccinationsCompleted'>Vaccinations Completed</option>
+                      <option value='vaccinesDistributed'>Vaccinations Distributed</option>
                     </select>
                   </label> 
                 </form>  
