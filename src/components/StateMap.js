@@ -1,59 +1,74 @@
-import React, { useEffect, useState } from "react";
-import { csv } from "d3-fetch";
-import { scaleLinear } from "d3-scale";
-
+import React from "react";
+import { geoCentroid } from "d3-geo";
 import {
   ComposableMap,
   Geographies,
   Geography,
-  Sphere,
-  Graticule
+  Marker,
+  Annotation
 } from "react-simple-maps";
 
+import statenames from "../data/statenames.json";
 
+const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
 
-const geoUrl =
-  "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
-
-const colorScale = scaleLinear()
-  .domain([0.29, 0.68])
-  .range(["#ffedea", "#ff5233"]);
+const offsets = {
+  VT: [50, -8],
+  NH: [34, 2],
+  MA: [30, -1],
+  RI: [28, 2],
+  CT: [35, 10],
+  NJ: [34, 1],
+  DE: [33, 0],
+  MD: [47, 10],
+  DC: [49, 21]
+};
 
 const StateMap = () => {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    csv(`/vulnerability.csv`).then((data) => {
-      setData(data);
-    });
-  }, []);
-
   return (
-    <ComposableMap
-      projectionConfig={{
-        rotate: [-10, 0, 0],
-        scale: 147
-      }}
-    >
-      <Sphere stroke="#E4E5E6" strokeWidth={0.5} />
-      <Graticule stroke="#E4E5E6" strokeWidth={0.5} />
-      {data.length > 0 && (
-        <Geographies geography={geoUrl}>
-          {({ geographies }) =>
-            geographies.map((geo) => {
-              console.log(data)
-              const d = data.find((s) => s.ISO3 === geo.properties.ISO_A3);
+    <ComposableMap projection="geoAlbersUsa">
+      <Geographies geography={geoUrl}>
+        {({ geographies }) => (
+          <>
+            {geographies.map(geo => (
+              <Geography
+                key={geo.rsmKey}
+                stroke="#FFF"
+                geography={geo}
+                fill="#DDD"
+              />
+            ))}
+            {geographies.map(geo => {
+              const centroid = geoCentroid(geo);
+              const cur = statenames.find(s => s.val === geo.id);
               return (
-                <Geography
-                  key={geo.rsmKey}
-                  geography={geo}
-                  fill={d ? colorScale(d["2017"]) : "#F5F4F6"}
-                />
+                <g key={geo.rsmKey + "-name"}>
+                  {cur &&
+                    centroid[0] > -160 &&
+                    centroid[0] < -67 &&
+                    (Object.keys(offsets).indexOf(cur.id) === -1 ? (
+                      <Marker coordinates={centroid}>
+                        <text y="2" fontSize={14} textAnchor="middle">
+                          {cur.id}
+                        </text>
+                      </Marker>
+                    ) : (
+                      <Annotation
+                        subject={centroid}
+                        dx={offsets[cur.id][0]}
+                        dy={offsets[cur.id][1]}
+                      >
+                        <text x={4} fontSize={14} alignmentBaseline="middle">
+                          {cur.id}
+                        </text>
+                      </Annotation>
+                    ))}
+                </g>
               );
-            })
-          }
-        </Geographies>
-      )}
+            })}
+          </>
+        )}
+      </Geographies>
     </ComposableMap>
   );
 };
