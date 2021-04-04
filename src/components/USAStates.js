@@ -1,6 +1,7 @@
 import React from "react"
 import axios from "axios"
 import Graph from "./Graph"
+import StateMap from "./StateMap"
 import "../styling/USAStates.css"
 import { Dropdown } from 'semantic-ui-react'
 import USDataBlock from "./USDataBlock"
@@ -288,7 +289,9 @@ class USAStates extends React.Component {
             newCases={this.state.newCases}
             newDeaths={this.state.newDeaths}
           />
+          <StateMap />
         </div>
+        
       </div>
     )
   }
