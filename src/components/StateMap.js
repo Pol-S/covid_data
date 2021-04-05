@@ -44,7 +44,7 @@ const StateMap = ({ usStatesData }) => {
                 key={geo.rsmKey}
                 stroke="#FFF"
                 geography={geo}
-                fill={riskLevel === 5 ? "pink" : riskLevel === 4 ? "grey" : riskLevel === 3 ? "red" : riskLevel === 2 ? "orange" : riskLevel === 1 ? "green" : riskLevel === 0 ? "blue" : null}
+                fill={riskLevel === 5 ? "pink" : riskLevel === 4 ? "grey" : riskLevel === 3 ? "orange" : riskLevel === 2 ? "yellow" : riskLevel === 1 ? "green" : riskLevel === 0 ? "blue" : null}
             />
             )
             })}

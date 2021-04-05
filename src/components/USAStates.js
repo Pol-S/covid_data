@@ -289,6 +289,7 @@ class USAStates extends React.Component {
             newCases={this.state.newCases}
             newDeaths={this.state.newDeaths}
           />
+          <h2>Risk Levels</h2>
           <StateMap 
             usStatesData={this.state.usStatesData}
           />
