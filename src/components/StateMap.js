@@ -7,7 +7,6 @@ import {
   Marker,
   Annotation
 } from "react-simple-maps";
-
 import statenames from "../data/statenames.json";
 
 const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
@@ -24,20 +23,31 @@ const offsets = {
   DC: [49, 21]
 };
 
-const StateMap = () => {
+
+const StateMap = ({ usStatesData }) => {
   return (
     <ComposableMap projection="geoAlbersUsa">
       <Geographies geography={geoUrl}>
         {({ geographies }) => (
           <>
-            {geographies.map(geo => (
-              <Geography
+            {geographies.map(geo => {
+              let riskLevel = ''
+              const usState = statenames.find(s => s.val === geo.id)
+              usStatesData.map(state => {
+                if (state.state == usState.id) {
+                  riskLevel = state.riskLevels.overall
+                }
+              })
+              console.log(riskLevel, 'risklevel!!!')
+              return (
+                <Geography
                 key={geo.rsmKey}
                 stroke="#FFF"
                 geography={geo}
-                fill="#DDD"
-              />
-            ))}
+                fill={riskLevel === 5 ? "pink" : riskLevel === 4 ? "grey" : riskLevel === 3 ? "red" : riskLevel === 2 ? "orange" : riskLevel === 1 ? "green" : riskLevel === 0 ? "blue" : null}
+            />
+            )
+            })}
             {geographies.map(geo => {
               const centroid = geoCentroid(geo);
               const cur = statenames.find(s => s.val === geo.id);

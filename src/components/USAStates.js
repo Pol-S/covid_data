@@ -49,7 +49,7 @@ class USAStates extends React.Component {
         newCases: response1.data.actuals.newCases,
         newDeaths: response1.data.actuals.newDeaths
       })
-      console.log(response1.data)
+      console.log(response2.data, 'response 2')
 
       //API KEY:  7a39cf0e85284f04ae5c28ddf433ed36
       // https://api.covidactnow.org/v2/state/MA.timeseries.json?apiKey=7a39cf0e85284f04ae5c28ddf433ed36
@@ -289,7 +289,9 @@ class USAStates extends React.Component {
             newCases={this.state.newCases}
             newDeaths={this.state.newDeaths}
           />
-          <StateMap />
+          <StateMap 
+            usStatesData={this.state.usStatesData}
+          />
         </div>
         
       </div>
