@@ -1,3 +1,7 @@
 form {
   display: inline;
 }
+
+.yAxis {
+  text-align: center;
+}

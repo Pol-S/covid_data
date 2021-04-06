@@ -3,6 +3,7 @@ import axios from "axios"
 import GraphCountry from "./GraphCountry"
 import { Dropdown } from 'semantic-ui-react'
 import "../styling/Countries.css"
+import CountriesMap from "./CountriesMap"
 
 class Countries extends React.Component {
   constructor() {
@@ -11,8 +12,9 @@ class Countries extends React.Component {
       countryData: [],
       countriesData: [],
       country: 'US',
-      yAxisCountries: 'confirmed',
-      countryOptions: []
+      yAxisCountries: 'Total',
+      countryOptions: [],
+      riskLevels: []
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleCountryUpdate = this.handleCountryUpdate.bind(this)
@@ -31,12 +33,15 @@ class Countries extends React.Component {
         headers: {
           'Content-Type': 'application/json'
         }
-      })
-    ]).then(([response1, response2]) => {
+      }),
+      axios.get('https://onemap.cdc.gov/onemapservices/rest/services/Hosted/COVID_Global2/FeatureServer/0/query?f=json&returnGeometry=true&spatialRel=esriSpatialRelIntersects&geometry=%7B%22xmin%22%3A-20037508.342787%2C%22ymin%22%3A-20037508.342781033%2C%22xmax%22%3A20037508.342781033%2C%22ymax%22%3A20037508.342787%2C%22spatialReference%22%3A%7B%22wkid%22%3A102100%2C%22latestWkid%22%3A3857%7D%7D&geometryType=esriGeometryEnvelope&inSR=102100&outFields=*&returnCentroid=false&returnExceededLimitFeatures=false&outSR=102100&resultType=tile&quantizationParameters=%7B%22mode%22%3A%22view%22%2C%22originPosition%22%3A%22upperLeft%22%2C%22tolerance%22%3A78271.51696400007%2C%22extent%22%3A%7B%22xmin%22%3A-20037508.342787%2C%22ymin%22%3A-20037508.342781033%2C%22xmax%22%3A20037508.342781033%2C%22ymax%22%3A20037508.342787%2C%22spatialReference%22%3A%7B%22wkid%22%3A102100%2C%22latestWkid%22%3A3857%7D%7D%7D')
+    ]).then(([response1, response2, response3]) => {
       this.setState({
         countryData: response1.data.data.timeline,
-        countriesData: response2.data.data
+        countriesData: response2.data.data,
+        riskLevels: response3.data.features
       })
+      console.log(response3)
 
       const options = this.state.countriesData.map((country) => {
         return {key: country.code, value: country.code, text: country.name}
@@ -72,9 +77,6 @@ class Countries extends React.Component {
         this.setState({
           countryData: response.data.data.timeline
         })
-        console.log('-----')
-        console.log(response.data)
-        console.log('-----')
       })
   }
 
@@ -85,34 +87,44 @@ class Countries extends React.Component {
   
   render() {
     return(
-      <div>
-        <GraphCountry 
-          covidCountryData={this.state.countryData}
-          yAxisCountries={this.state.yAxisCountries}
-          country={this.state.country}
-        />
-         <form onSubmit={this.handleSubmit}>
-          Choose a country: 
-          <Dropdown
-            options={this.state.countryOptions}
-            placeholder='USA'
-            search
-            selection
-            value={this.state.country}
-            onChange={this.handleCountryChange}
+      <div className="ui stackable grid top aligned">
+        <div class="eight wide column">
+          <h2 className="yAxis">{this.state.yAxisCountries}</h2>
+          <GraphCountry 
+            covidCountryData={this.state.countryData}
+            yAxisCountries={this.state.yAxisCountries}
+            country={this.state.country}
           />
-        </form>  
-        <form onSubmit={this.handleSubmit}> 
-          <label className="label">Choose a category:
-            <select className="ui selection dropdown" value={this.state.yAxisCountries} onChange={this.handleYCountryChange}>       
-                <option className="text" value='confirmed'>Total</option>
-                <option className="text" value='deaths'>Death</option>
-                <option className="text" value='recovered'>Recovered</option>
-                <option className="text" value='new_deaths'>New Deaths</option>                           
-                <option className="text" value='new_confirmed'>New Cases</option>                
-            </select>
-          </label> 
-        </form>  
+          <form onSubmit={this.handleSubmit}>
+            Choose a country: 
+            <Dropdown
+              options={this.state.countryOptions}
+              placeholder='USA'
+              search
+              selection
+              value={this.state.country}
+              onChange={this.handleCountryChange}
+            />
+          </form>  
+          <form onSubmit={this.handleSubmit}> 
+            <label className="label">Choose a category:
+              <select className="ui selection dropdown" value={this.state.yAxisCountries} onChange={this.handleYCountryChange}>       
+                  <option className="text" value='Total'>Total</option>
+                  <option className="text" value='Deaths'>Death</option>
+                  <option className="text" value='Recovered'>Recovered</option>
+                  <option className="text" value='Daily Deaths'>Daily Deaths</option>                           
+                  <option className="text" value='Daily Cases'>Daily Cases</option>                
+              </select>
+            </label> 
+          </form>  
+        </div>
+
+        <div class="eight wide column">
+          data block goes here
+          <CountriesMap 
+            riskLevels={this.state.riskLevels}
+          />
+        </div>
       </div>
     )
   }

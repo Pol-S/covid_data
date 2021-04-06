@@ -8,7 +8,7 @@ function Header() {
       <div className="banner">
       Covid Data Tracker
       </div>
-      <div>
+      <div className="buttons">
         <Link to="/">
           <button className="ui left attached button">
             Compare U.S. States
@@ -19,7 +19,7 @@ function Header() {
             Compare Countries
           </button>
         </Link>
-        </div>
+      </div>
       <hr></hr>
     </header>
   )
