@@ -49,25 +49,25 @@ class Graph extends React.Component {
     // console.log(this.props.yAxis)
     const covidData = this.props.covidData.map((data) => {
       let yData = data.cases
-      if (this.props.yAxis === 'deaths') {
+      if (this.props.yAxis === 'Deaths') {
         yData = data.deaths
-      } else if ( this.props.yAxis === 'hospitalized') {
+      } else if ( this.props.yAxis === 'Hospitalized') {
         yData = data.hospitalBeds.currentUsageCovid
-      } else if ( this.props.yAxis === 'total') {
+      } else if ( this.props.yAxis === 'Total') {
         yData = data.cases
-      } else if (this.props.yAxis === 'newDeaths') {
+      } else if (this.props.yAxis === 'Daily Deaths') {
         yData = data.newDeaths
-      } else if (this.props.yAxis === 'newCases') {
+      } else if (this.props.yAxis === 'Daily Cases') {
         yData = data.newCases
-      } else if (this.props.yAxis === 'currentUsageCovid') {
+      } else if (this.props.yAxis === 'ICU Patients') {
         yData = data.icuBeds.currentUsageCovid
-      } else if (this.props.yAxis === 'vaccinationsCompleted') {
+      } else if (this.props.yAxis === 'Vaccinations Completed') {
         if (data.vaccinationsCompleted) {
           yData = data.vaccinationsCompleted
         } else {
           yData = null
         }
-      } else if (this.props.yAxis === 'vaccinesDistributed') {
+      } else if (this.props.yAxis === 'Vaccines Distributed') {
         if (data.vaccinesDistributed) {
           yData = data.vaccinesDistributed
         } else {

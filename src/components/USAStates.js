@@ -14,7 +14,7 @@ class USAStates extends React.Component {
       usStatesData: [],
       currentUsState: 'California',
       usState: "ca",
-      yAxis: 'cases',
+      yAxis: 'Total',
       stateOptions: [],
       deaths: 0,
       cases: 0,
@@ -244,6 +244,7 @@ class USAStates extends React.Component {
     return(
       <div className="ui stackable grid middle aligned">
         <div class="eight wide column">
+          <h2 className="yAxis">{this.state.yAxis}</h2>
           <Graph     
             covidData={this.state.covidData}
             usState={this.state.usState}
@@ -264,14 +265,14 @@ class USAStates extends React.Component {
           <form onSubmit={this.handleSubmit}>
                   <label className="label">Choose a category:
                     <select className="ui selection dropdown" value={this.state.yAxis} onChange={this.handleYChange}>
-                      <option value='total'>Total</option>
-                      <option value='hospitalized'>Hospitalized</option>
-                      <option value='deaths'>Death</option>
-                      <option value='newDeaths'>Daily Deaths</option>
-                      <option value='newCases'>Daily Cases</option>
-                      <option value='currentUsageCovid'>ICU currently</option>
-                      <option value='vaccinationsCompleted'>Vaccinations Completed</option>
-                      <option value='vaccinesDistributed'>Vaccinations Distributed</option>
+                      <option value='Total'>Total</option>
+                      <option value='Hospitalized'>Hospitalized</option>
+                      <option value='Deaths'>Deaths</option>
+                      <option value='Daily Deaths'>Daily Deaths</option>
+                      <option value='Daily Cases'>Daily Cases</option>
+                      <option value='ICU Patients'>ICU Patients</option>
+                      <option value='Vaccinations Completed'>Vaccinations Completed</option>
+                      <option value='Vaccines Distributed'>Vaccinations Distributed</option>
                     </select>
                   </label> 
                 </form>  
