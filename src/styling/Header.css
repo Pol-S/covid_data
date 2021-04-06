@@ -8,3 +8,7 @@
   height: 100px;
   display: flex;
 }
+
+.buttons {
+  text-align: center;
+}

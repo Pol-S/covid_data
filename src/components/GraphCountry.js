@@ -46,15 +46,15 @@ class GraphCountry extends React.Component {
   render() {
     const covidData = this.props.covidCountryData.map((data) => {
       let yData = data.confirmed
-      if (this.props.yAxisCountries === 'confirmed') {
+      if (this.props.yAxisCountries === 'Total') {
         yData = data.confirmed
-      } else if ( this.props.yAxisCountries === 'deaths') {
+      } else if ( this.props.yAxisCountries === 'Deaths') {
         yData = data.deaths
-      } else if ( this.props.yAxisCountries === 'recovered') {
+      } else if ( this.props.yAxisCountries === 'Recovered') {
         yData = data.recovered
-      } else if (this.props.yAxisCountries === 'new_deaths') {
+      } else if (this.props.yAxisCountries === 'Daily Deaths') {
         yData = data.new_deaths
-      } else if (this.props.yAxisCountries === 'new_confirmed') {
+      } else if (this.props.yAxisCountries === 'Daily Cases') {
         yData = data.new_confirmed
       } 
       const dateString = data.date

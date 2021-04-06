@@ -5,7 +5,7 @@ function Footer() {
   return (
     <footer>
       <div className="footer">
-        <p>US State Data from The Atlantic Monthly Group. All Rights Reserved.</p>
+        <p>US State Data from Covid Act Now API. All Rights Reserved.</p>
         <p>World Country Data from Corona-Api. All Rights Reserved.</p>
       </div>
     </footer>

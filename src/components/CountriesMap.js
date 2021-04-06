@@ -19,7 +19,7 @@ const colorScale = scaleLinear()
   .domain([0.29, 0.68])
   .range(["#ffedea", "#ff5233"]);
 
-const StateMap = () => {
+const CountriesMap = ({riskLevels}) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -41,13 +41,19 @@ const StateMap = () => {
         <Geographies geography={geoUrl}>
           {({ geographies }) =>
             geographies.map((geo) => {
-              console.log(data)
+              let riskLevel = ""
               const d = data.find((s) => s.ISO3 === geo.properties.ISO_A3);
+              console.log(d)
+              riskLevels.map(risk => {
+                if (risk.attributes.country_na === d.Name){
+                  riskLevel = risk.attributes.covid_thn
+                }
+              })
               return (
                 <Geography
                   key={geo.rsmKey}
                   geography={geo}
-                  fill={d ? colorScale(d["2017"]) : "#F5F4F6"}
+                  fill={riskLevel === "999" ? "grey" : riskLevel === "1" ? "green" : riskLevel === "2" ? "yellow" : riskLevel === "3" ? "orange" : riskLevel === "4" ? "red" : "white"}
                 />
               );
             })
@@ -58,4 +64,4 @@ const StateMap = () => {
   );
 };
 
-export default StateMap
+export default CountriesMap
