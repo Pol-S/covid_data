@@ -23,7 +23,8 @@ class USAStates extends React.Component {
       riskLevel: 0,
       ICUCapacityPercentage: 0,
       newCases: 0,
-      newDeaths: 0
+      newDeaths: 0,
+      infectionRate: 0
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleStateUpdate = this.handleStateUpdate.bind(this)
@@ -47,7 +48,8 @@ class USAStates extends React.Component {
         riskLevel: response1.data.riskLevels.overall,
         ICUCapacityPercentage: response1.data.metrics.icuCapacityRatio,
         newCases: response1.data.actuals.newCases,
-        newDeaths: response1.data.actuals.newDeaths
+        newDeaths: response1.data.actuals.newDeaths,
+        infectionRate: response1.data.riskLevels.infectionRate
       })
       console.log(response2.data, 'response 2')
 
@@ -155,6 +157,7 @@ class USAStates extends React.Component {
           vaccinesDistributed: response.data.actuals.vaccinesDistributed,
           vaccinesCompleted: response.data.actuals.vaccinationsCompleted,
           riskLevel: response.data.riskLevels.overall,
+          infectionRate: response.data.riskLevels.infectionRate,
           ICUCapacityPercentage: response.data.metrics.icuCapacityRatio,
           newCases: response.data.actuals.newCases,
           newDeaths: response.data.actuals.newDeaths      
@@ -289,6 +292,7 @@ class USAStates extends React.Component {
             ICUCapacityPercentage={this.state.ICUCapacityPercentage}
             newCases={this.state.newCases}
             newDeaths={this.state.newDeaths}
+            infectionRate={this.state.infectionRate}
           />
           <h2>Risk Levels</h2>
           <StateMap 

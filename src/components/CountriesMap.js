@@ -21,6 +21,7 @@ const colorScale = scaleLinear()
 
 const CountriesMap = ({riskLevels}) => {
   const [data, setData] = useState([]);
+  console.log(riskLevels)
 
   useEffect(() => {
     csv(`/vulnerability.csv`).then((data) => {
@@ -42,10 +43,9 @@ const CountriesMap = ({riskLevels}) => {
           {({ geographies }) =>
             geographies.map((geo) => {
               let riskLevel = ""
-              const d = data.find((s) => s.ISO3 === geo.properties.ISO_A3);
-              console.log(d)
+              const d = geo.properties.ISO_A2;
               riskLevels.map(risk => {
-                if (risk.attributes.country_na === d.Name){
+                if (risk.attributes.iso === d){
                   riskLevel = risk.attributes.covid_thn
                 }
               })
@@ -53,7 +53,7 @@ const CountriesMap = ({riskLevels}) => {
                 <Geography
                   key={geo.rsmKey}
                   geography={geo}
-                  fill={riskLevel === "999" ? "grey" : riskLevel === "1" ? "green" : riskLevel === "2" ? "yellow" : riskLevel === "3" ? "orange" : riskLevel === "4" ? "red" : "white"}
+                  fill={riskLevel === "999" ? "grey" : riskLevel === "1" ? "yellow" : riskLevel === "2" ? "orange" : riskLevel === "3" ? "red" : riskLevel === "4" ? "maroon" : "white"}
                 />
               );
             })

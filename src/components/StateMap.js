@@ -33,6 +33,7 @@ const StateMap = ({ usStatesData }) => {
             {geographies.map(geo => {
               let riskLevel = ''
               const usState = statenames.find(s => s.val === geo.id)
+              console.log(usState, "US STATE")
               usStatesData.map(state => {
                 if (state.state == usState.id) {
                   riskLevel = state.riskLevels.overall
@@ -43,7 +44,7 @@ const StateMap = ({ usStatesData }) => {
                 key={geo.rsmKey}
                 stroke="#4a4a4a"
                 geography={geo}
-                fill={riskLevel === 5 ? "pink" : riskLevel === 4 ? "grey" : riskLevel === 3 ? "orange" : riskLevel === 2 ? "#f5ef42" : riskLevel === 1 ? "green" : riskLevel === 0 ? "blue" : "white"}
+                fill={riskLevel === 5 ? "maroon" : riskLevel === 4 ? "grey" : riskLevel === 3 ? "red" : riskLevel === 2 ? "orange" : riskLevel === 1 ? "#f5ef42" : riskLevel === 0 ? "green" : "white"}
             />
             )
             })}

@@ -14,7 +14,7 @@ class USDataBlock extends React.Component {
           </h2>
         </div>
         <div className="ui mini statistics">
-          <div className={this.props.riskLevel === 0 ? `blue statistic` : this.props.riskLevel === 1 ? `green statistic` : this.props.riskLevel === 2 ? `yellow statistic` : this.props.riskLevel === 3 ? `orange statistic` : this.props.riskLevel === 4 ? `grey statistic` : `red statistic` }>
+          <div className={this.props.riskLevel === 0 ? `green statistic` : this.props.riskLevel === 1 ? `yellow statistic` : this.props.riskLevel === 2 ? `orange statistic` : this.props.riskLevel === 3 ? `red statistic` : this.props.riskLevel === 4 ? `grey statistic` : `maroon statistic` }>
             <div className="value">
               {this.props.riskLevel}
             </div>
@@ -22,7 +22,15 @@ class USDataBlock extends React.Component {
               Risk Level
             </div>
           </div>
-          <div className={ roundICUPercentage > 75 ? `red statistic` : roundICUPercentage > 50 ? `orange statistic` : `yellow statistic`}>
+          <div className={this.props.infectionRate < 1 ? "green statistic" : this.props.infectionRate >= 1 && this.props.infectionRate < 2 ? "yellow statistic" : "red statistic" }>
+            <div className="value">
+              {this.props.infectionRate}
+            </div>
+            <div className="label">
+              Infection Rate
+            </div>
+          </div>
+          <div className={ roundICUPercentage > 85 ? `red statistic` : roundICUPercentage < 85 && roundICUPercentage >= 80 ? `orange statistic` : roundICUPercentage < 80 && roundICUPercentage >= 70 ? `yellow statistic` : `green statistic`}>
             <div className="value">
               {roundICUPercentage}%
             </div>
