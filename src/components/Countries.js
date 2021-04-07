@@ -4,6 +4,7 @@ import GraphCountry from "./GraphCountry"
 import { Dropdown } from 'semantic-ui-react'
 import "../styling/Countries.css"
 import CountriesMap from "./CountriesMap"
+import CountryDataBlock from './CountryDataBlock'
 
 class Countries extends React.Component {
   constructor() {
@@ -12,9 +13,18 @@ class Countries extends React.Component {
       countryData: [],
       countriesData: [],
       country: 'US',
+      currentCountry: 'United States',
       yAxisCountries: 'Total',
       countryOptions: [],
-      riskLevels: []
+      riskLevels: [],
+      dailyCases: 0,
+      dailyDeaths: 0,
+      totalCases: 0,
+      totalDeaths: 0,
+      totalCritical: 0,
+      deathRate: 0,
+      recoveryRate: 0,
+      casesPerMillion: 0
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleCountryUpdate = this.handleCountryUpdate.bind(this)
@@ -39,9 +49,18 @@ class Countries extends React.Component {
       this.setState({
         countryData: response1.data.data.timeline,
         countriesData: response2.data.data,
-        riskLevels: response3.data.features
+        riskLevels: response3.data.features,
+        dailyCases: response1.data.data.today.confirmed,
+        dailyDeaths: response1.data.data.today.deaths,
+        totalCases: response1.data.data.latest_data.confirmed,
+        totalDeaths: response1.data.data.latest_data.deaths,
+        totalCritical: response1.data.data.latest_data.critical,
+        deathRate: response1.data.data.latest_data.calculated.death_rate,
+        recoveryRate: response1.data.data.latest_data.calculated.recovery_rate,
+        casesPerMillion: response1.data.data.latest_data.calculated.cases_per_million_population
       })
-      console.log(response3)
+      console.log(response1, 'response 1')
+      console.log(response2, 'response 2')
 
       const options = this.state.countriesData.map((country) => {
         return {key: country.code, value: country.code, text: country.name}
@@ -75,9 +94,31 @@ class Countries extends React.Component {
     })
       .then(response => {
         this.setState({
-          countryData: response.data.data.timeline
+          countryData: response.data.data.timeline,
+          dailyCases: response.data.data.today.confirmed,
+          dailyDeaths: response.data.data.today.deaths,
+          totalCases: response.data.data.latest_data.confirmed,
+          totalDeaths: response.data.data.latest_data.deaths,
+          totalCritical: response.data.data.latest_data.critical,
+          deathRate: response.data.data.latest_data.calculated.death_rate,
+          recoveryRate: response.data.data.latest_data.calculated.recovery_rate,
+          casesPerMillion: response.data.data.latest_data.calculated.cases_per_million_population
         })
       })
+      this.handleCurrentCountry()
+  }
+
+  handleCurrentCountry = () => {
+    let currentNation = ''
+    this.state.countriesData.map(country => {
+      if (this.state.country === country.code) {
+        currentNation = country.name
+      }
+    })
+    this.setState({
+      currentCountry: currentNation
+    })
+
   }
 
   handleSubmit(event) {
@@ -120,7 +161,19 @@ class Countries extends React.Component {
         </div>
 
         <div class="eight wide column">
-          data block goes here
+          <CountryDataBlock  
+            dailyCases={this.state.dailyCases} 
+            dailyDeaths={this.state.dailyDeaths} 
+            totalCases={this.state.totalCases} 
+            totalDeaths={this.state.totalDeaths} 
+            totalCritical={this.state.totalCritical} 
+            deathRate={this.state.deathRate} 
+            recoveryRate={this.state.recoveryRate} 
+            casesPerMillion={this.state.casesPerMillion}
+            country={this.state.country} 
+            currentCountry={this.state.currentCountry}
+          />
+          <h2 className="riskLevels"> Risk Levels</h2>
           <CountriesMap 
             riskLevels={this.state.riskLevels}
           />

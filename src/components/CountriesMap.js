@@ -36,7 +36,7 @@ const CountriesMap = ({riskLevels}) => {
         scale: 147
       }}
     >
-      <Sphere stroke="#E4E5E6" strokeWidth={0.5} />
+      <Sphere stroke="black" strokeWidth={0.5} />
       <Graticule stroke="#E4E5E6" strokeWidth={0.5} />
       {data.length > 0 && (
         <Geographies geography={geoUrl}>

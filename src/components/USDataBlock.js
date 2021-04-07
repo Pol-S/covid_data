@@ -3,14 +3,13 @@ import React from "react"
 
 class USDataBlock extends React.Component {
 
-
   render() {
     const roundICUPercentage = Math.round(this.props.ICUCapacityPercentage * 100)
     return (
       <div className="statistics">
         <div className="state-name">
           <h2 className="ui header">
-            {this.props.handleStateChange}
+            {this.props.currentUsState}
           </h2>
         </div>
         <div className="ui mini statistics">
@@ -20,14 +19,6 @@ class USDataBlock extends React.Component {
             </div>
             <div className="label">
               Risk Level
-            </div>
-          </div>
-          <div className={this.props.infectionRate < 1 ? "green statistic" : this.props.infectionRate >= 1 && this.props.infectionRate < 2 ? "yellow statistic" : "red statistic" }>
-            <div className="value">
-              {this.props.infectionRate}
-            </div>
-            <div className="label">
-              Infection Rate
             </div>
           </div>
           <div className={ roundICUPercentage > 85 ? `red statistic` : roundICUPercentage < 85 && roundICUPercentage >= 80 ? `orange statistic` : roundICUPercentage < 80 && roundICUPercentage >= 70 ? `yellow statistic` : `green statistic`}>

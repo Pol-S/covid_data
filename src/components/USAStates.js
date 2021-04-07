@@ -23,8 +23,7 @@ class USAStates extends React.Component {
       riskLevel: 0,
       ICUCapacityPercentage: 0,
       newCases: 0,
-      newDeaths: 0,
-      infectionRate: 0
+      newDeaths: 0
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleStateUpdate = this.handleStateUpdate.bind(this)
@@ -49,7 +48,6 @@ class USAStates extends React.Component {
         ICUCapacityPercentage: response1.data.metrics.icuCapacityRatio,
         newCases: response1.data.actuals.newCases,
         newDeaths: response1.data.actuals.newDeaths,
-        infectionRate: response1.data.riskLevels.infectionRate
       })
       console.log(response2.data, 'response 2')
 
@@ -157,17 +155,16 @@ class USAStates extends React.Component {
           vaccinesDistributed: response.data.actuals.vaccinesDistributed,
           vaccinesCompleted: response.data.actuals.vaccinationsCompleted,
           riskLevel: response.data.riskLevels.overall,
-          infectionRate: response.data.riskLevels.infectionRate,
           ICUCapacityPercentage: response.data.metrics.icuCapacityRatio,
           newCases: response.data.actuals.newCases,
           newDeaths: response.data.actuals.newDeaths      
         })
         console.log(response.data)
       })  
-      this.handleStateChange() 
+      this.handleCurrentState() 
   }
 
-  handleStateChange = () => {
+  handleCurrentState = () => {
     let currentState = ''
     const states = [
       {code: 'AL', state: 'Alabama'},
@@ -282,7 +279,7 @@ class USAStates extends React.Component {
         </div>
         <div class="eight wide column">
           <USDataBlock 
-            handleStateChange={this.state.currentUsState}
+            currentUsState={this.state.currentUsState}
             usState={this.state.usState}
             deaths={this.state.deaths}
             cases={this.state.cases}
@@ -292,9 +289,8 @@ class USAStates extends React.Component {
             ICUCapacityPercentage={this.state.ICUCapacityPercentage}
             newCases={this.state.newCases}
             newDeaths={this.state.newDeaths}
-            infectionRate={this.state.infectionRate}
           />
-          <h2>Risk Levels</h2>
+          <h2 className="riskLevels">Risk Levels</h2>
           <StateMap 
             usStatesData={this.state.usStatesData}
           />

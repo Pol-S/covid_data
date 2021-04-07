@@ -33,7 +33,6 @@ const StateMap = ({ usStatesData }) => {
             {geographies.map(geo => {
               let riskLevel = ''
               const usState = statenames.find(s => s.val === geo.id)
-              console.log(usState, "US STATE")
               usStatesData.map(state => {
                 if (state.state == usState.id) {
                   riskLevel = state.riskLevels.overall
