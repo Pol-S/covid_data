@@ -9,3 +9,57 @@ form {
 .riskLevels {
   text-align: center;
 }
+
+.maroonCell {
+  color: #ffffff;
+  background-color: maroon;
+  margin-top: -1rem;
+  margin-bottom: -1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.greyCell {
+  color: #ffffff;
+  background-color: grey;
+  margin-top: -1rem;
+  margin-bottom: -1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.redCell {
+  color: #ffffff;
+  background-color: red;
+  margin-top: -1rem;
+  margin-bottom: -1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.orangeCell {
+  color: #ffffff;
+  background-color: orange;
+  margin-top: -1rem;
+  margin-bottom: -1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.yellowCell {
+  color: #ffffff;
+  background-color: #f5ef42;
+  margin-top: -1rem;
+  margin-bottom: -1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.greenCell {
+  color: #ffffff;
+  background-color: green;
+  margin-top: -1rem;
+  margin-bottom: -1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}

@@ -291,6 +291,28 @@ class USAStates extends React.Component {
             newDeaths={this.state.newDeaths}
           />
           <h2 className="riskLevels">Risk Levels</h2>
+          <div className="ui equal width center aligned padded grid">
+            <div className="row">
+              <div className="maroonCell column">
+                EXTREME
+              </div>
+              <div className="greyCell column">
+                UNKNOWN
+              </div>
+              <div className="redCell column">
+                CRITICAL
+              </div>
+              <div className="orangeCell column">
+                HIGH
+              </div>
+              <div className="yellowCell column">
+                MEDIUM
+              </div>
+              <div className="greenCell column">
+                LOW
+              </div>
+            </div>
+          </div>
           <StateMap 
             usStatesData={this.state.usStatesData}
           />
