@@ -1,26 +1,31 @@
 import React from "react"
 import { Link } from 'react-router-dom'
 import "../styling/Header.css"
+import covidsafety from "../data/covidsafety.png"
 
 function Header() {
   return (
     <header>
       <div className="banner">
-      Covid Data Tracker
+      <div className="title">Covid Data Tracker</div>
+      <img className="image" src={covidsafety} style={{height: "100px", textAlign: "right"}}/>
       </div>
       <div className="buttons">
-        <Link to="/">
-          <button className="ui left attached button">
-            Compare U.S. States
-          </button>
-        </Link>
-        <Link to="/components/countries">
-          <button className="right attached ui button">
-            Compare Countries
-          </button>
-        </Link>
+        <div className="ui buttons">
+          <Link to="/">
+            <button className="ui button">
+              United States Data
+            </button>
+          </Link>
+          <div className="or"></div>
+          <Link to="/components/countries">
+            <button className="ui button">
+              International Data
+            </button>
+          </Link>
+          </div>
       </div>
-      <hr></hr>
+    <br></br>
     </header>
   )
 }

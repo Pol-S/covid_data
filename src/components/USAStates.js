@@ -296,9 +296,6 @@ class USAStates extends React.Component {
               <div className="maroonCell column">
                 EXTREME
               </div>
-              <div className="greyCell column">
-                UNKNOWN
-              </div>
               <div className="redCell column">
                 CRITICAL
               </div>
@@ -310,6 +307,9 @@ class USAStates extends React.Component {
               </div>
               <div className="greenCell column">
                 LOW
+              </div>
+              <div className="greyCell column">
+                UNKNOWN
               </div>
             </div>
           </div>

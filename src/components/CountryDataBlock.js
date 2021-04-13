@@ -12,7 +12,7 @@ const CountryDataBlock = ({dailyCases, dailyDeaths, totalCases, totalDeaths, tot
         </h2>
       </div>
       <div className="ui mini statistics">
-        <div className={ roundRecoveryRate > 90 ? `green statistic` : roundRecoveryRate < 90 && roundRecoveryRate >= 80 ? `yellow statistic` : roundRecoveryRate < 80 && roundRecoveryRate >= 70 ? `red statistic` : `maroon statistic`}>
+        <div className={ roundRecoveryRate > 90 ? `green statistic` : roundRecoveryRate < 90 && roundRecoveryRate >= 80 ? `yellow statistic` : roundRecoveryRate < 80 && roundRecoveryRate >= 70 ? `orange statistic` : `red statistic`}>
           <div className="value">
             {roundRecoveryRate}%
           </div>
@@ -20,9 +20,11 @@ const CountryDataBlock = ({dailyCases, dailyDeaths, totalCases, totalDeaths, tot
             Recovery Rate
           </div>
         </div>
-        <div className="statistic">
+        <div className={ roundDeathRate > 3 ? `red statistic` : roundDeathRate < 3 && roundDeathRate >= 2 ? `orange statistic` : roundDeathRate < 2 && roundDeathRate >= 1 ? `yellow statistic` : `green statistic`}>
           <div className="value">
             {roundDeathRate}%
+            {/* 
+            > 4% is maroon, 4-3% is red, 3-2% is orange, 2-1% is yellow, <1% is green  */}
           </div>
           <div className="label">
             Death Rate

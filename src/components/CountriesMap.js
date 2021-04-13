@@ -15,10 +15,6 @@ import {
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 
-const colorScale = scaleLinear()
-  .domain([0.29, 0.68])
-  .range(["#ffedea", "#ff5233"]);
-
 const CountriesMap = ({riskLevels}) => {
   const [data, setData] = useState([]);
   console.log(riskLevels)
@@ -52,8 +48,9 @@ const CountriesMap = ({riskLevels}) => {
               return (
                 <Geography
                   key={geo.rsmKey}
+                  stroke="white"
                   geography={geo}
-                  fill={riskLevel === "999" ? "grey" : riskLevel === "1" ? "yellow" : riskLevel === "2" ? "orange" : riskLevel === "3" ? "red" : riskLevel === "4" ? "maroon" : "white"}
+                  fill={riskLevel === "999" ? "grey" : riskLevel === "1" ? "yellow" : riskLevel === "2" ? "orange" : riskLevel === "3" ? "red" : riskLevel === "4" ? "maroon" : geo.properties.ISO_A2 === "US" ? "maroon" : "white"}
                 />
               );
             })

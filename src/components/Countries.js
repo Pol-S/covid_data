@@ -177,22 +177,19 @@ class Countries extends React.Component {
           <div className="ui equal width center aligned padded grid">
             <div className="row">
               <div className="maroonCell column">
-                EXTREME
+                VERY HIGH
+              </div>
+              <div className="redCell column">
+                HIGH
+              </div>
+              <div className="orangeCell column">
+                MODERATE
+              </div>
+              <div className="yellowCell column">
+                LOW
               </div>
               <div className="greyCell column">
                 UNKNOWN
-              </div>
-              <div className="redCell column">
-                CRITICAL
-              </div>
-              <div className="orangeCell column">
-                HIGH
-              </div>
-              <div className="yellowCell column">
-                MEDIUM
-              </div>
-              <div className="greenCell column">
-                LOW
               </div>
             </div>
           </div>
