@@ -1,3 +1,4 @@
+import '../styling/CountryDataBlock.css'
 import React from 'react'
 
 const CountryDataBlock = ({dailyCases, dailyDeaths, totalCases, totalDeaths, totalCritical, deathRate, recoveryRate, casesPerMillion, currentCountry}) => {
