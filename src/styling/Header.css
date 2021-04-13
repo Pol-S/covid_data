@@ -2,14 +2,18 @@
   background-color: firebrick;
   height: 100px;
   display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .title {
   color: whitesmoke;
   font-size: xx-large;
-  text-align: left;
   justify-content: left;
   align-items: center;
+  flex: auto;
+  line-height: 80%;
+  padding-left: 10%;
 }
 
 .buttons {
@@ -20,4 +24,5 @@
 .image {
   justify-content: right;
   align-items: center;
+  padding-right: 10%;
 }

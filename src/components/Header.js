@@ -7,8 +7,11 @@ function Header() {
   return (
     <header>
       <div className="banner">
-      <div className="title">Covid Data Tracker</div>
-      <img className="image" src={covidsafety} style={{height: "100px", textAlign: "right"}}/>
+        <div className="title">Covid<br></br>Data<br></br> Tracker</div>
+        <div className="image">
+          <img src={covidsafety} style={{height: "100px", textAlign: "right"}}/>
+        </div>
+      
       </div>
       <div className="buttons">
         <div className="ui buttons">
