@@ -23,7 +23,8 @@ class USAStates extends React.Component {
       riskLevel: 0,
       ICUCapacityPercentage: 0,
       newCases: 0,
-      newDeaths: 0
+      newDeaths: 0,
+      percentVaccinated: 0
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleStateUpdate = this.handleStateUpdate.bind(this)
@@ -48,8 +49,10 @@ class USAStates extends React.Component {
         ICUCapacityPercentage: response1.data.metrics.icuCapacityRatio,
         newCases: response1.data.actuals.newCases,
         newDeaths: response1.data.actuals.newDeaths,
+        percentVaccinated: response1.data.metrics.vaccinationsCompletedRatio
       })
       console.log(response2.data, 'response 2')
+      console.log(response1.data, 'response 1 CA')
 
       //API KEY:  7a39cf0e85284f04ae5c28ddf433ed36
       // https://api.covidactnow.org/v2/state/MA.timeseries.json?apiKey=7a39cf0e85284f04ae5c28ddf433ed36
@@ -157,7 +160,8 @@ class USAStates extends React.Component {
           riskLevel: response.data.riskLevels.overall,
           ICUCapacityPercentage: response.data.metrics.icuCapacityRatio,
           newCases: response.data.actuals.newCases,
-          newDeaths: response.data.actuals.newDeaths      
+          newDeaths: response.data.actuals.newDeaths,
+          percentVaccinated: response.data.metrics.vaccinationsCompletedRatio      
         })
         console.log(response.data)
       })  
@@ -289,6 +293,7 @@ class USAStates extends React.Component {
             ICUCapacityPercentage={this.state.ICUCapacityPercentage}
             newCases={this.state.newCases}
             newDeaths={this.state.newDeaths}
+            percentVaccinated={this.state.percentVaccinated}
           />
           <h2 className="riskLevels">Risk Levels</h2>
           <div className="ui equal width center aligned padded grid">

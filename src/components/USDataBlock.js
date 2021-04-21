@@ -5,6 +5,7 @@ class USDataBlock extends React.Component {
 
   render() {
     const roundICUPercentage = Math.round(this.props.ICUCapacityPercentage * 100)
+    const roundPercentVaccinated = Math.round(this.props.percentVaccinated * 100)
     return (
       <div className="statistics">
         <div className="state-name">
@@ -78,6 +79,14 @@ class USDataBlock extends React.Component {
             </div>
             <div className="label">
               Vaccines Completed
+            </div>
+          </div>
+          <div className="statistic">
+            <div className="value">
+              {roundPercentVaccinated}%
+            </div>
+            <div className="label">
+              Percent Vaccinated
             </div>
           </div>
         </div>
