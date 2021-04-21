@@ -7,7 +7,7 @@ function Header() {
   return (
     <header>
       <div className="banner">
-        <div className="title">Covid<br></br>Data<br></br> Tracker</div>
+        <div className="title">Corona<br></br>Data<br></br> Tracker</div>
         <div className="image">
           <img src={covidsafety} style={{height: "100px", textAlign: "right"}}/>
         </div>
