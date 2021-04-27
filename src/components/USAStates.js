@@ -5,6 +5,7 @@ import StateMap from "./StateMap"
 import "../styling/USAStates.css"
 import { Dropdown } from 'semantic-ui-react'
 import USDataBlock from "./USDataBlock"
+import AnimatedMap from "./AnimatedMap"
 
 class USAStates extends React.Component {
   constructor() {
@@ -321,6 +322,7 @@ class USAStates extends React.Component {
           <StateMap 
             usStatesData={this.state.usStatesData}
           />
+          <AnimatedMap/>
         </div>
         
       </div>
