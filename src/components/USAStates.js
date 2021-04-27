@@ -248,7 +248,7 @@ class USAStates extends React.Component {
   render() {
     return(
       <div className="ui stackable grid top aligned">
-        <div class="eight wide column">
+        <div className="eight wide column">
           <h2 className="yAxis">{this.state.yAxis}</h2>
           <Graph     
             covidData={this.state.covidData}
@@ -282,7 +282,7 @@ class USAStates extends React.Component {
                   </label> 
                 </form>  
         </div>
-        <div class="eight wide column">
+        <div className="eight wide column">
           <USDataBlock 
             currentUsState={this.state.currentUsState}
             usState={this.state.usState}

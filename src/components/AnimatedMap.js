@@ -8,8 +8,12 @@ import {
   Annotation
 } from "react-simple-maps";
 import statenames from "../data/statenames.json";
+import countyCoords from '../data/countyCoords.json';
+
+
 
 const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
+
 const offsets = {
   VT: [50, -8],
   NH: [34, 2],
@@ -70,9 +74,11 @@ const AnimatedMap = () => {
           </>
         )}
       </Geographies>
-        <Marker coordinates={[41.7003, 70.3002]}>
-          <circle r={8} fill="red" />
+      {countyCoords.map(({name, coord}) => 
+        <Marker key={name} coordinates={coord}>
+          <circle r={3} fill="red" />
         </Marker>
+      )}
     </ComposableMap>
   );
 };
