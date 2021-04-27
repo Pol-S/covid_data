@@ -21,6 +21,7 @@ const offsets = {
   MD: [47, 10],
   DC: [49, 21]
 };
+
 const AnimatedMap = () => {
   return (
     <ComposableMap projection="geoAlbersUsa">
@@ -28,7 +29,6 @@ const AnimatedMap = () => {
         {({ geographies }) => (
           <>
             {geographies.map(geo => {
-              let riskLevel = ''
               const usState = statenames.find(s => s.val === geo.id)
               return (
                 <Geography
@@ -70,6 +70,9 @@ const AnimatedMap = () => {
           </>
         )}
       </Geographies>
+        <Marker coordinates={[-74.006, 40.7128]}>
+          <circle r={8} fill="#F53" />
+        </Marker>
     </ComposableMap>
   );
 };
