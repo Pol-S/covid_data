@@ -70,8 +70,8 @@ const AnimatedMap = () => {
           </>
         )}
       </Geographies>
-        <Marker coordinates={[-74.006, 40.7128]}>
-          <circle r={8} fill="#F53" />
+        <Marker coordinates={[41.7003, 70.3002]}>
+          <circle r={8} fill="red" />
         </Marker>
     </ComposableMap>
   );
